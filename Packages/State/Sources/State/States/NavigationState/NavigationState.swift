@@ -1,4 +1,4 @@
-public struct NavigationState {
+public struct NavigationState: Equatable {
     
     // MARK: - Properties
     

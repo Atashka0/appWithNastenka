@@ -12,10 +12,7 @@ struct AppWithNastenkaApp: App {
                     .navigationDestination(for: Route.self, destination: navigationController.view)
             }
             .onAppear {
-                stateStore.subscribe(navigationController)
-            }
-            .onDisappear {
-                stateStore.unsubscribe(navigationController)
+                navigationController.subscribe()
             }
         }
     }
