@@ -3,6 +3,7 @@ import State
 import ReSwift
 import SwiftUI
 
+/// Получает обновление стейта и публикует обновленные переменные.
 final class NavigationController: ObservableObject {
     @Published var root: Route = .yellow
     @Published var path: [Route] = [] {
@@ -40,9 +41,7 @@ extension NavigationController {
 }
 
 extension NavigationController: StoreSubscriber {
-    typealias StoreSubscriberStateType = NavigationState
-    
-    func newState(state: StoreSubscriberStateType) {
+    func newState(state: NavigationState) {
         pathInState = state.path
         root = state.root
         path = state.path

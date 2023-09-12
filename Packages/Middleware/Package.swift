@@ -4,13 +4,13 @@
 import PackageDescription
 
 let package = Package(
-    name: "State",
+    name: "Middleware",
     platforms: [.iOS(.v16)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "State",
-            targets: ["State"]),
+            name: "Middleware",
+            targets: ["Middleware"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -19,19 +19,17 @@ let package = Package(
             url: "https://github.com/ReSwift/ReSwift",
             branch: "master"
         ),
-        .package(path: "../Common"),
+        .package(path: "../AuthManager"),
+        .package(path: "../State")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "State",
-            dependencies: [
-                .product(name: "ReSwift", package: "ReSwift"),
-                "Common"
-            ]),
+            name: "Middleware",
+            dependencies: [.product(name: "ReSwift", package: "ReSwift"), "AuthManager", "State"]),
         .testTarget(
-            name: "StateTests",
-            dependencies: ["State"]),
+            name: "MiddlewareTests",
+            dependencies: ["Middleware"]),
     ]
 )

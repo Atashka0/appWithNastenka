@@ -1,5 +1,8 @@
 import ReSwift
 
+/// Принимает на вход экшен и старый стейт.
+/// Если пришел экшен навигации, то обрабатывает его.
+/// Возвращает обновленный стейт навигации.
 func navigationReducer(action: Action, state: NavigationState?) -> NavigationState {
     var state = state ?? NavigationState()
     
