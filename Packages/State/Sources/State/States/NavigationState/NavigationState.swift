@@ -9,7 +9,7 @@ public struct NavigationState: Equatable {
     
     public init(
         path: [Route] = [],
-        root: Route = .yellow
+        root: Route = .reg
     ) {
         self.path = path
         self.root = root
