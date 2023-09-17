@@ -1,12 +1,4 @@
-//
-//  LoginView.swift
-//  AppWithNastenka
-//
-//  Created by Ilyas Kudaibergenov on 19.09.2023.
-//
-
 import SwiftUI
-import RegexBuilder
 import State
 
 struct LoginView: View {
@@ -16,23 +8,14 @@ struct LoginView: View {
     var body: some View {
         VStack {
             Spacer()
-            Text("With.me")
-                .font(.system(size: 45, weight: .bold, design: .rounded))
-                .foregroundColor(.black)
-                .bold()
+            Image("logo")
+                .resizable()
+                .frame(width: 83.5, height: 59.5, alignment: .center)
+                .padding(.vertical, 100)
             TextField("Username",text: $username)
                 .modifier(TextFieldModifier())
             CustomInputView(placeholder: "Password", isSecuredField: true, text: $password)
                 .modifier(TextFieldModifier())
-            NavigationLink {
-                Text("Forgot Password???")
-            } label: {
-                Text("Forgot Password?")
-                    .font(.footnote)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.black)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-            }
             
             Button {
                 //authAction

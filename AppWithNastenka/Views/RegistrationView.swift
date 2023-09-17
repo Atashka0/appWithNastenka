@@ -1,10 +1,3 @@
-//
-//  RegistrationView.swift
-//  AppWithNastenka
-//
-//  Created by Ilyas Kudaibergenov on 19.09.2023.
-//
-
 import SwiftUI
 import RegexBuilder
 import State
@@ -17,11 +10,10 @@ struct RegistrationView: View {
     
     var body: some View {
         VStack {
-            Spacer()
-            Text("With.me")
-                .font(.system(size: 45, weight: .bold, design: .rounded))
-                .foregroundColor(.black)
-                .bold()
+            Image("logo")
+                .resizable()
+                .frame(width: 83.5, height: 59.5, alignment: .center)
+                .padding(.vertical, 100)
             TextField("Email",text: $email)
                 .modifier(TextFieldModifier())
             TextField("Username",text: $username)
@@ -35,15 +27,13 @@ struct RegistrationView: View {
             } label: {
                 Text("Sign up")
                     .modifier(ButtonModifier())
-                    .padding(.top, 10)
             }
             
             Spacer()
-            
+            Divider()
             HStack {
                 Text("Already have an account?")
                     .foregroundColor(.black)
-                
                 Button {
                     stateStore.dispatch(NavigationAction.push(.login))
                 } label: {

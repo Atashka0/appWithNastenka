@@ -1,14 +1,7 @@
-//
-//  CustomInputView.swift
-//  AppWithNastenka
-//
-//  Created by Ilyas Kudaibergenov on 17.09.2023.
-//
-
 import SwiftUI
 
 struct CustomInputView: View {
-    var placeholder: String
+    let placeholder: String
     var imageName: String?
     var isSecuredField: Bool = false
     @Binding var text: String
@@ -26,7 +19,7 @@ struct CustomInputView: View {
             }
             
         }
-        .frame(height: 40)
+        .frame(height: 45)
         .background(Color(.systemGray5))
     }
 }
