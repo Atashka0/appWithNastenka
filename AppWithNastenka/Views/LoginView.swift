@@ -7,7 +7,6 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
-            Spacer()
             Image("logo")
                 .resizable()
                 .frame(width: 83.5, height: 59.5, alignment: .center)
