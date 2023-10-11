@@ -12,13 +12,6 @@
 		0930860E2AAA03370038A014 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0930860D2AAA03370038A014 /* NavigationController.swift */; };
 		093086102AAA0C0C0038A014 /* Route+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0930860F2AAA0C0C0038A014 /* Route+View.swift */; };
 		093086122AAA0C880038A014 /* BlueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093086112AAA0C880038A014 /* BlueView.swift */; };
-		FE3DCF8D2AB7553A001E3F06 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DCF8C2AB7553A001E3F06 /* RegistrationView.swift */; };
-		FE3DCF902AB755A7001E3F06 /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DCF8F2AB755A7001E3F06 /* CustomInputView.swift */; };
-		FE3DCF932AB757AE001E3F06 /* TextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DCF922AB757AE001E3F06 /* TextFieldModifier.swift */; };
-		FE3DCF952AB75B90001E3F06 /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DCF942AB75B90001E3F06 /* ColorScheme.swift */; };
-		FE3DCF972AB76B2D001E3F06 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DCF962AB76B2D001E3F06 /* LoginView.swift */; };
-		FE9401E42AD3DE5E0019C2DC /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9401E32AD3DE5E0019C2DC /* GlobalConstants.swift */; };
-		FE96D8292AD3E563008B21C9 /* Jost in Resources */ = {isa = PBXBuildFile; fileRef = FE96D8282AD3E563008B21C9 /* Jost */; };
 		FEB960A22AA907D800882488 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB960A12AA907D800882488 /* App.swift */; };
 		FEB960A42AA907D800882488 /* YellowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB960A32AA907D800882488 /* YellowView.swift */; };
 		FEB960A62AA907DA00882488 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEB960A52AA907DA00882488 /* Assets.xcassets */; };
@@ -32,14 +25,6 @@
 		0930860D2AAA03370038A014 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		0930860F2AAA0C0C0038A014 /* Route+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Route+View.swift"; sourceTree = "<group>"; };
 		093086112AAA0C880038A014 /* BlueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueView.swift; sourceTree = "<group>"; };
-		FE3DCF8C2AB7553A001E3F06 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
-		FE3DCF8F2AB755A7001E3F06 /* CustomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
-		FE3DCF922AB757AE001E3F06 /* TextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldModifier.swift; sourceTree = "<group>"; };
-		FE3DCF942AB75B90001E3F06 /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
-		FE3DCF962AB76B2D001E3F06 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		FE9401E32AD3DE5E0019C2DC /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
-		FE96D8282AD3E563008B21C9 /* Jost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Jost; path = ../../../../../Downloads/Jost; sourceTree = "<group>"; };
-		FE96D82C2AD3E74E008B21C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FEB9609E2AA907D800882488 /* AppWithNastenka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppWithNastenka.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEB960A12AA907D800882488 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		FEB960A32AA907D800882488 /* YellowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowView.swift; sourceTree = "<group>"; };
@@ -91,43 +76,8 @@
 			children = (
 				093086112AAA0C880038A014 /* BlueView.swift */,
 				FEB960A32AA907D800882488 /* YellowView.swift */,
-				FE3DCF8C2AB7553A001E3F06 /* RegistrationView.swift */,
-				FE3DCF962AB76B2D001E3F06 /* LoginView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		FE3DCF8E2AB75584001E3F06 /* ViewComponents */ = {
-			isa = PBXGroup;
-			children = (
-				FE3DCF8F2AB755A7001E3F06 /* CustomInputView.swift */,
-			);
-			path = ViewComponents;
-			sourceTree = "<group>";
-		};
-		FE3DCF912AB75748001E3F06 /* ViewModifiers */ = {
-			isa = PBXGroup;
-			children = (
-				FE3DCF922AB757AE001E3F06 /* TextFieldModifier.swift */,
-			);
-			path = ViewModifiers;
-			sourceTree = "<group>";
-		};
-		FE9401E02AD3DA8D0019C2DC /* BrandBook */ = {
-			isa = PBXGroup;
-			children = (
-				FE3DCF942AB75B90001E3F06 /* ColorScheme.swift */,
-				FE9401E32AD3DE5E0019C2DC /* GlobalConstants.swift */,
-			);
-			path = BrandBook;
-			sourceTree = "<group>";
-		};
-		FE96D8272AD3E548008B21C9 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				FE96D8282AD3E563008B21C9 /* Jost */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		FEB960952AA907D800882488 = {
@@ -151,17 +101,12 @@
 		FEB960A02AA907D800882488 /* AppWithNastenka */ = {
 			isa = PBXGroup;
 			children = (
-				FE96D82C2AD3E74E008B21C9 /* Info.plist */,
-				FE96D8272AD3E548008B21C9 /* Fonts */,
 				0930860C2AAA03290038A014 /* Navigation */,
 				FEB960A12AA907D800882488 /* App.swift */,
-				FE3DCF912AB75748001E3F06 /* ViewModifiers */,
 				093086132AAA0E860038A014 /* Views */,
-				FE3DCF8E2AB75584001E3F06 /* ViewComponents */,
 				FEB960A52AA907DA00882488 /* Assets.xcassets */,
 				FEB960AA2AA907DA00882488 /* Persistence.swift */,
 				FEB960AC2AA907DA00882488 /* AppWithNastenka.xcdatamodeld */,
-				FE9401E02AD3DA8D0019C2DC /* BrandBook */,
 				FEB960A72AA907DA00882488 /* Preview Content */,
 			);
 			path = AppWithNastenka;
@@ -241,7 +186,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEB960A92AA907DA00882488 /* Preview Assets.xcassets in Resources */,
-				FE96D8292AD3E563008B21C9 /* Jost in Resources */,
 				FEB960A62AA907DA00882488 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,16 +200,10 @@
 				093086122AAA0C880038A014 /* BlueView.swift in Sources */,
 				FEB960AB2AA907DA00882488 /* Persistence.swift in Sources */,
 				FEB960A42AA907D800882488 /* YellowView.swift in Sources */,
-				FE9401E42AD3DE5E0019C2DC /* GlobalConstants.swift in Sources */,
 				093086102AAA0C0C0038A014 /* Route+View.swift in Sources */,
 				0930860E2AAA03370038A014 /* NavigationController.swift in Sources */,
-				FE3DCF902AB755A7001E3F06 /* CustomInputView.swift in Sources */,
-				FE3DCF972AB76B2D001E3F06 /* LoginView.swift in Sources */,
-				FE3DCF952AB75B90001E3F06 /* ColorScheme.swift in Sources */,
-				FE3DCF932AB757AE001E3F06 /* TextFieldModifier.swift in Sources */,
 				FEB960AE2AA907DA00882488 /* AppWithNastenka.xcdatamodeld in Sources */,
 				FEB960A22AA907D800882488 /* App.swift in Sources */,
-				FE3DCF8D2AB7553A001E3F06 /* RegistrationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,7 +335,6 @@
 				DEVELOPMENT_TEAM = 6XT2H38622;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AppWithNastenka/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,7 +365,6 @@
 				DEVELOPMENT_TEAM = 6XT2H38622;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AppWithNastenka/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
