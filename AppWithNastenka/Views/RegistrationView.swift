@@ -9,43 +9,55 @@ struct RegistrationView: View {
     @State var passwordVerification: String = ""
     
     var body: some View {
-        VStack {
-            Image("logo")
-                .resizable()
-                .frame(width: 83.5, height: 59.5, alignment: .center)
-                .padding(.vertical, 100)
-            TextField("Email",text: $email)
-                .modifier(TextFieldModifier())
-            TextField("Username",text: $username)
-                .modifier(TextFieldModifier())
-            CustomInputView(placeholder: "Password", isSecuredField: true, text: $password)
-                .modifier(TextFieldModifier())
-            CustomInputView(placeholder: "Confirm Password", isSecuredField: true, text: $passwordVerification)
-                .modifier(TextFieldModifier())
-            Button {
-               //authAction
-            } label: {
-                Text("Sign up")
-                    .modifier(ButtonModifier())
-            }
-            
-            Spacer()
-            Divider()
-            HStack {
-                Text("Already have an account?")
-                    .foregroundColor(.black)
+        GeometryReader { geometry in
+            VStack(spacing: geometry.size.height * RegLogConstants.verticalSpacing) {
+                Image(AssetNames.logo)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(
+                        width: geometry.size.width * RegLogConstants.logoSize,
+                        height: geometry.size.height * RegLogConstants.logoSize
+                    )
+                    .padding(.vertical, geometry.size.height * RegLogConstants.logoVerticalPadding)
+                    .foregroundColor(Color("black-lemonYellow"))
+                TextField("Email",text: $email)
+                    .modifier(TextFieldModifier())
+                TextField("Username",text: $username)
+                    .modifier(TextFieldModifier())
+                CustomSecureField(placeholder: "Password", rightView: AssetNames.eye, text: $password)
+                    .modifier(TextFieldModifier())
+                CustomSecureField(
+                    placeholder: "Confirm Password",
+                    rightView: AssetNames.eye,
+                    text: $passwordVerification
+                )
+                    .modifier(TextFieldModifier())
                 Button {
-                    stateStore.dispatch(NavigationAction.push(.login))
+                    //authAction
                 } label: {
-                    Text("Sign In")
-                        .foregroundColor(.black)
-                        .fontWeight(.bold)
+                    Text("Sign up")
+                        .modifier(ButtonModifier())
                 }
+                
+                Spacer()
+                Divider()
+                HStack {
+                    Text("Already have an account?")
+                        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.textSize))
+                    Button {
+                        stateStore.dispatch(NavigationAction.push(.login))
+                    } label: {
+                        Text("Sign In")
+                            .font(Font.custom(FontNames.jostSemiBold, size: GlobalConstants.textSize))
+                    }
+                }
+                .foregroundColor(ColorScheme.grayAndWhite)
+                .font(.footnote)
+                .padding(.bottom, geometry.size.height * RegLogConstants.bottomViewBottomPadding)
+                .padding(.top, geometry.size.height * RegLogConstants.bottomViewTopPadding)
             }
-            .padding(.top)
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
-        
     }
 }
 
@@ -58,13 +70,17 @@ struct RegistrationView_Previews: PreviewProvider {
 public struct ButtonModifier: ViewModifier {
     public func body(content: Content) -> some View {
         content
+            .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.textSize))
             .frame(minWidth: 0, maxWidth: .infinity)
-            .frame(height: 45)
+            .frame(height: RegLogConstants.buttonHeight)
             .foregroundColor(.black)
             .background(ColorScheme.lemonYellow)
             .contentShape(Rectangle())
-            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color(uiColor: .systemGray5)))
-            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .overlay(RoundedRectangle(
+                cornerRadius: GlobalConstants.buttonCornerRadius)
+                .stroke(Color(uiColor: .systemBackground))
+            )
+            .clipShape(RoundedRectangle(cornerRadius: GlobalConstants.buttonCornerRadius))
     }
 }
 
