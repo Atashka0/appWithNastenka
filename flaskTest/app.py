@@ -1,34 +1,70 @@
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-db = SQLAlchemy(app)
+app.secret_key = "secret"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
+
+db = SQLAlchemy()
+db.init_app(app)
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password_hash = db.Column(db.String(120), nullable=False)
+    username = db.Column(db.String(20), unique=True, nullable=False)
+    password = db.Column(db.String(60), nullable=False)
 
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+    def __init__(self, username, password):
+        self.username = username
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
 
-@app.route('/')
-def ping():
-    return 'pong'
+# Create tables
+with app.app_context():
+    db.create_all()
 
-@app.route('/register', methods=['POST'])
+
+@app.route("/register", methods=["POST"])
 def register():
-    username = request.form.get('username')
-    password = request.form.get('password')
-    user = User(username=username)
-    user.set_password(password)
+    data = request.json
+
+    if not data or "username" not in data or "password" not in data:
+        return jsonify({"error": "Invalid data format"}), 400
+
+    username = data["username"]
+    password = data["password"]
+
+    if User.query.filter_by(username=username).first():
+        return jsonify({"error": "Username already exists"}), 400
+
+    user = User(username=username, password=password)
     db.session.add(user)
     db.session.commit()
-    return redirect('/')
 
-if __name__ == '__main__':
-    db.create_all()  # Create the database
-    app.run(debug=True)
+    return jsonify({"message": "User registered successfully"}), 201
+
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.json
+
+    if not data or "username" not in data or "password" not in data:
+        return jsonify({"error": "Invalid data format"}), 400
+
+    username = data["username"]
+    password = data["password"]
+
+    user = User.query.filter_by(username=username).first()
+
+    if not user or not user.check_password(password):
+        return jsonify({"error": "Invalid username or password"}), 401
+
+    return jsonify({"message": "Login successful"}), 200
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=8080)
