@@ -24,15 +24,15 @@ class User(db.Model):
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
 
-    # Constructor to initialize User objects
-    def __init__(self, username, password):
-        self.username = username
-        # Hash the password before storing it in the database
-        self.password = generate_password_hash(password)
+# Constructor to initialize User objects
+def __init__(self, username, password):
+    self.username = username
+    # Hash the password before storing it in the database
+    self.password = generate_password_hash(password)
 
-    # Method to check if the provided password matches the stored hashed password
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
+# Method to check if the provided password matches the stored hashed password
+def check_password(self, password):
+    return check_password_hash(self.password, password)
 
 # Create database tables based on defined models
 with app.app_context():
