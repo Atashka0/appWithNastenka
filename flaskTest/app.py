@@ -21,18 +21,20 @@ db.init_app(app)
 # Define a User model class for the database
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(60), unique=True, nullable=False)
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
 
-# Constructor to initialize User objects
-def __init__(self, username, password):
-    self.username = username
-    # Hash the password before storing it in the database
-    self.password = generate_password_hash(password)
+    # Constructor to initialize User objects
+    def __init__(self, email, username, password):
+        self.email = email
+        self.username = username
+        # Hash the password before storing it in the database
+        self.password = generate_password_hash(password)
 
-# Method to check if the provided password matches the stored hashed password
-def check_password(self, password):
-    return check_password_hash(self.password, password)
+    # Method to check if the provided password matches the stored hashed password
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
 # Create database tables based on defined models
 with app.app_context():
@@ -45,19 +47,20 @@ def register():
     data = request.json
 
     # Check if the required fields are present in the JSON data
-    if not data or "username" not in data or "password" not in data:
+    if not data or "email" not in data or "password" not in data:
         return jsonify({"error": "Invalid data format"}), 400
 
     # Extract username and password from the JSON data
+    email = data["email"]
     username = data["username"]
     password = data["password"]
 
     # Check if the username already exists in the database
-    if User.query.filter_by(username=username).first():
-        return jsonify({"error": "Username already exists"}), 400
+    if User.query.filter_by(email=email).first():
+        return jsonify({"error": "User already exists"}), 400
 
     # Create a new User object and add it to the database
-    user = User(username=username, password=password)
+    user = User(email=email, username=username, password=password)
     db.session.add(user)
     db.session.commit()
 
@@ -71,15 +74,15 @@ def login():
     data = request.json
 
     # Check if the required fields are present in the JSON data
-    if not data or "username" not in data or "password" not in data:
+    if not data or "email" not in data or "password" not in data:
         return jsonify({"error": "Invalid data format"}), 400
 
     # Extract username and password from the JSON data
-    username = data["username"]
+    email = data["email"]
     password = data["password"]
 
     # Query the database to find a user with the provided username
-    user = User.query.filter_by(username=username).first()
+    user = User.query.filter_by(email=email).first()
 
     # If the user doesn't exist, return an error response
     if not user:
