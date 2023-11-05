@@ -139,9 +139,7 @@ xcuserdata
 ### Flask Application ###
 
 flaskTest/venv/
-
 flaskTest/instance/
-
 flaskTest/__pycache__/
 
 
