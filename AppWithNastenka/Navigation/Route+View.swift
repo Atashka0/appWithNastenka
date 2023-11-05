@@ -6,6 +6,8 @@ extension Route {
         switch self {
         case .blue: BlueView()
         case .yellow: YellowView()
+        case .reg: RegistrationView()
+        case .login: LoginView()
         }
     }
 }
