@@ -33,7 +33,7 @@ def register():
     db.session.add(user)
     db.session.commit()
 
-    return jsonify({"message": "User registered successfully"}), 201
+    return jsonify(user.to_dict()), 201
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -53,13 +53,24 @@ def login():
     if not user.check_password(password):
         return jsonify({"error": "Invalid password"}), 401
 
-    return jsonify({"message": "Login successful"}), 200
+    return jsonify(user.to_dict()), 200
 
 @app.route("/users", methods=["GET"])
 def get_users():
     users = User.query.all()
-    users_list = [{"id": user.id, "email": user.email, "username": user.username} for user in users]
+    users_list = [{ "id": user.id, "email": user.email, "username": user.username, "password": user.password } for user in users]
     return jsonify(users_list), 200
+    
+@app.route("/user/<int:id>", methods=["DELETE"])
+def delete_user(id):
+   user = User.query.get(id)
+   if not user:
+       return jsonify({"error": "User not found"}), 404
+
+   db.session.delete(user)
+   db.session.commit()
+
+   return jsonify({"message": "User deleted successfully"}), 200
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8080)

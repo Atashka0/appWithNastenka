@@ -11,14 +11,27 @@ public func authMiddleware(authManager: AuthManager) -> Middleware<AppState> {
                     return
                 }
                 switch action {
-                case let .fetchUser(email):
+                case let .fetchUser(email, password):
                     dispatch(AuthAction.setUser(.loading))
                     Task {
-                        let result = await authManager.fetchUser(with: email)
+                        let result = await authManager.fetchUser(email: email, password: password)
                         switch result {
-                        case let .success(username):
-                            if let username {
-                                let user = User(username: username, email: email)
+                        case let .success(user):
+                            if let user {
+                                dispatch(AuthAction.setUser(.ready(user)))
+                            }
+                        case let .failure(error):
+                            // TODO: handle error
+                            print(error)
+                        }
+                    }
+                case let .registerUser(email, username, password):
+                    dispatch(AuthAction.setUser(.loading))
+                    Task {
+                        let result = await authManager.registerUser(email: email, username: username, password: password)
+                        switch result {
+                        case let .success(user):
+                            if let user {
                                 dispatch(AuthAction.setUser(.ready(user)))
                             }
                         case let .failure(error):
@@ -38,6 +51,7 @@ public func authMiddleware(authManager: AuthManager) -> Middleware<AppState> {
                             print("Could not logout: ", error)
                         }
                     }
+                    
                 default: break
                 }
                 next(action)

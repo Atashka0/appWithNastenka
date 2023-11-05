@@ -1,12 +1,14 @@
 import SwiftUI
 import RegexBuilder
 import State
+import Combine
 
 struct RegistrationView: View {
     @State var email: String = ""
     @State var username: String = ""
     @State var password: String = ""
     @State var passwordVerification: String = ""
+    @State var passwordMismatch: Bool = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -31,13 +33,21 @@ struct RegistrationView: View {
                     rightView: AssetNames.eye,
                     text: $passwordVerification
                 )
-                    .modifier(TextFieldModifier())
+                .modifier(TextFieldModifier())
+                .onReceive(Just(passwordVerification)) { _ in
+                    passwordMismatch = password != passwordVerification
+                }
+                Text(passwordMismatch ? "Passwords do not match" : "")
+                    .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.textSize))
+                    .foregroundColor(.red)
                 Button {
-                    //authAction
+                    stateStore.dispatch(AuthAction.registerUser(email, username, password))
                 } label: {
                     Text("Sign up")
                         .modifier(ButtonModifier())
+                        .opacity(passwordMismatch ? RegLogConstants.disabledOpacity : RegLogConstants.enabledOpacity)
                 }
+                .disabled(passwordMismatch)
                 
                 Spacer()
                 Divider()
