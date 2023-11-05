@@ -1,34 +1,65 @@
-from flask import Flask, request, redirect, render_template
-from flask_sqlalchemy import SQLAlchemy
+import os
+import secrets
+from flask import Flask, request, jsonify
+from models import db, User
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-db = SQLAlchemy(app)
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password_hash = db.Column(db.String(120), nullable=False)
+app.secret_key = os.environ.get('FLASK_SECRET_KEY', secrets.token_hex(16))
 
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 
+db.init_app(app)
 
-@app.route('/')
-def ping():
-    return 'pong'
+with app.app_context():
+    db.create_all()
 
-@app.route('/register', methods=['POST'])
+@app.route("/register", methods=["POST"])
 def register():
-    username = request.form.get('username')
-    password = request.form.get('password')
-    user = User(username=username)
-    user.set_password(password)
+    data = request.json
+
+    if not data or "email" not in data or "password" not in data:
+        return jsonify({"error": "Invalid data format"}), 400
+    
+    email = data["email"]
+    username = data["username"]
+    password = data["password"]
+
+    if User.query.filter_by(email=email).first():
+        return jsonify({"error": "User already exists"}), 400
+
+    user = User(email=email, username=username, password=password)
     db.session.add(user)
     db.session.commit()
-    return redirect('/')
 
-if __name__ == '__main__':
-    db.create_all()  # Create the database
-    app.run(debug=True)
+    return jsonify({"message": "User registered successfully"}), 201
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.json
+
+    if not data or "email" not in data or "password" not in data:
+        return jsonify({"error": "Invalid data format"}), 400
+
+    email = data["email"]
+    password = data["password"]
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        return jsonify({"error": "There's no such user"}), 401
+
+    if not user.check_password(password):
+        return jsonify({"error": "Invalid password"}), 401
+
+    return jsonify({"message": "Login successful"}), 200
+
+@app.route("/users", methods=["GET"])
+def get_users():
+    users = User.query.all()
+    users_list = [{"id": user.id, "email": user.email, "username": user.username} for user in users]
+    return jsonify(users_list), 200
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=8080)
