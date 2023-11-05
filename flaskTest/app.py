@@ -4,23 +4,17 @@ from flask import Flask, request, jsonify
 from models import db, User
 from werkzeug.security import generate_password_hash, check_password_hash
 
-# Create a Flask application
 app = Flask(__name__)
 
-# Generate a secure random key or use the one stored in the environment variable
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', secrets.token_hex(16))
 
-# Configure the SQLite database URI
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 
-# Initialize SQLAlchemy and associate it with the Flask app
 db.init_app(app)
 
-# Create database tables based on defined models
 with app.app_context():
     db.create_all()
 
-# Define a route for user registration
 @app.route("/register", methods=["POST"])
 def register():
     data = request.json
@@ -41,7 +35,6 @@ def register():
 
     return jsonify({"message": "User registered successfully"}), 201
 
-# Define a route for user login
 @app.route("/login", methods=["POST"])
 def login():
     data = request.json
@@ -62,6 +55,11 @@ def login():
 
     return jsonify({"message": "Login successful"}), 200
 
-# Run the Flask application
+@app.route("/users", methods=["GET"])
+def get_users():
+    users = User.query.all()
+    users_list = [{"id": user.id, "email": user.email, "username": user.username} for user in users]
+    return jsonify(users_list), 200
+
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8080)
