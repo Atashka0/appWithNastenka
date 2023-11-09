@@ -2,7 +2,7 @@ import SwiftUI
 import State
 
 struct LoginView: View {
-    @State var username: String = ""
+    @State var email: String = ""
     @State var password: String = ""
     
     var body: some View {
@@ -16,14 +16,14 @@ struct LoginView: View {
                         height: geometry.size.height * RegLogConstants.logoSize
                     )
                     .padding(.vertical, geometry.size.height * RegLogConstants.logoVerticalPadding)
-                    .foregroundColor(Color("black-lemonYellow"))
-                TextField("Email",text: $username)
+                    .foregroundColor(ColorScheme.blackAndLemonYellow)
+                TextField("Email",text: $email)
                     .modifier(TextFieldModifier())
                 CustomSecureField(placeholder: "Password", rightView: AssetNames.eye, text: $password)
                     .modifier(TextFieldModifier())
                 
                 Button {
-                    //authAction
+                    stateStore.dispatch(AuthAction.fetchUser(email, password))
                 } label: {
                     Text("Login")
                         .modifier(ButtonModifier())
@@ -77,4 +77,6 @@ struct RegLogConstants {
     static let bottomViewTopPadding = 0.005
     static let logoSize = 0.2
     static let buttonHeight: CGFloat = 50
+    static let disabledOpacity: Double = 0.7
+    static let enabledOpacity: Double = 1
 }

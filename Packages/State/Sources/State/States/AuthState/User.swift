@@ -1,9 +1,5 @@
-public struct User {
+public struct User: Codable {
+    public let id: Int
     public let username: String
     public let email: String
-    
-    public init(username: String, email: String) {
-        self.username = username
-        self.email = email
-    }
 }

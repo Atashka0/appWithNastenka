@@ -23,7 +23,7 @@ struct BlueView: View {
                 Button {
                     switch authController.user {
                     case .initial:
-                        stateStore.dispatch(AuthAction.fetchUser("email"))
+                        stateStore.dispatch(AuthAction.fetchUser("email", "password"))
                     case .ready(_):
                         stateStore.dispatch(AuthAction.setUser(.initial))
                     case .loading:
