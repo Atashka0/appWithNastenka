@@ -20,15 +20,20 @@ struct MainView: View {
             HStack {
                 ForEach(MainViewType.allCases, id: \.rawValue) {
                     item in
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(selectedView == item ? Color.init(red: 18/256, green: 18/256, blue: 18/256) : Color.black)
+                            .frame(width: 60, height: 35)
+                        
                         Text(item.title)
-                            .background(selectedView == item ? Color.init(red: 18/256, green: 18/256, blue: 18/256) : Color.black)
                             .frame(width: 30, height: 25)
-                            .clipShape(RoundedRectangle(cornerRadius: 13))
-                            .onTapGesture {
-                                withAnimation(.easeInOut) {
-                                    self.selectedView = item
-                                }
-                            }
+                    }
+                    .onTapGesture {
+                        withAnimation(.easeInOut) {
+                            self.selectedView = item
+                        }
+                    }
+
                 }
                 Spacer()
                 Image(systemName: "magnifyingglass")
@@ -44,8 +49,10 @@ struct MainView: View {
             Spacer()
             HStack {
                 Image(systemName: "plus.circle")
+                    .scaleEffect(CGSize(width: 1.5, height: 1.5))
                 Spacer()
                 Image(systemName: "circle")
+                    .scaleEffect(CGSize(width: 1.5, height: 1.5))
             }
         }
         .padding()
