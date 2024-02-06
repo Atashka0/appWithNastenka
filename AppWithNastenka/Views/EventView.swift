@@ -15,44 +15,69 @@ struct EventView: View {
     var body: some View {
             HStack {
                 VStack (alignment: .center) {
-                    Image(systemName: "circle")
+                    Image(systemName: EventView.Images.circleFill)
                         .resizable()
-                        .frame(width: 60, height: 60)
+                        .frame(width: EventView.Dimensions.imageSize, height: EventView.Dimensions.imageSize)
                     Text(username)
                         .lineLimit(1)
                         .multilineTextAlignment(.center)
-                        .font(Font.custom(FontNames.jostRegular, size: 12))
+                        .font(Font.custom(EventView.Fonts.jostRegular, size: EventView.Fonts.regularFontSize))
                 }
-                Spacer(minLength: 5)
+                .frame(width:  100, height:  100)
+                Spacer(minLength:  5)
                 VStack (alignment: .leading) {
                     Text(eventName)
-                        .font(Font.custom(FontNames.jostRegular, size: 20))
+                        .font(Font.custom(EventView.Fonts.jostRegular, size: EventView.Fonts.largeFontSize))
                     Text(date)
-                        .font(Font.custom(FontNames.jostRegular, size: 12))
+                        .font(Font.custom(EventView.Fonts.jostRegular, size: EventView.Fonts.regularFontSize))
                     Spacer()
                     HStack {
                         ForEach(characteristics, id: \.self) { characteristic in
                             Text(characteristic)
-                                .frame(width: CGFloat(characteristic.count * 6), height: 30)
-                                .font(Font.custom(FontNames.jostRegular, size: 12))
+                                .frame(width: CGFloat(characteristic.count *  6), height: EventView.Dimensions.characteristicFrameHeight)
+                                .font(Font.custom(EventView.Fonts.jostRegular, size: EventView.Fonts.regularFontSize))
                                 .lineLimit(1)
                                 .foregroundColor(.black)
                                 .background(ColorScheme.lemonYellow)
-                                .clipShape(RoundedRectangle(cornerRadius: 25))
+                                .clipShape(RoundedRectangle(cornerRadius:  25))
                         }
                     }
                 }
             }
-            .frame(height: 80)
+            .frame(height: EventView.Dimensions.frameHeight)
             .padding()
-            .background(Color.init(red: 18/256, green: 18/256, blue: 18/256))
-            .clipShape(RoundedRectangle(cornerRadius: 13))
-        }
+            .background(EventView.Colors.darkGray)
+            .clipShape(RoundedRectangle(cornerRadius: EventView.Dimensions.cornerRadius))
+        }}
+
+extension EventView {
+    struct Colors {
+        static let darkGray = Color(red:  18/256, green:  18/256, blue:  18/256)
+    }
+    
+    struct Dimensions {
+        static let imageSize: CGFloat =  60
+        static let frameHeight: CGFloat =  80
+        static let cornerRadius: CGFloat =  13
+        static let characteristicFrameHeight: CGFloat =  30
+    }
+    
+    struct Fonts {
+        static let jostRegular = "Jost-Regular"
+        static let regularFontSize: CGFloat =  12
+        static let largeFontSize: CGFloat =  20
+    }
+    
+    struct Images {
+        static let circleFill = "circle.fill"
+        static let backgroundColor = Color(red:  18/256, green:  18/256, blue:  18/256)
+    }
 }
+
 
 struct EventView_Previews: PreviewProvider {
     static var previews: some View {
-        EventView(username: "margo", eventName: "Margo’s BD", date: "April 11, 2024", characteristics: ["90's party", "90's inspired", "Best costume contest"])
+        EventView(username: "margo", eventName: "Halloween costume party", date: "April 11, 2024", characteristics: ["90's party", "90's inspired", "Best costume contest"])
 
     }
 }
