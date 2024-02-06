@@ -23,8 +23,8 @@ struct EventView: View {
                         .multilineTextAlignment(.center)
                         .font(Font.custom(EventView.Fonts.jostRegular, size: EventView.Fonts.regularFontSize))
                 }
-                .frame(width:  100, height:  100)
-                Spacer(minLength:  5)
+                .frame(width:  EventView.Dimensions.userDataFrame, height:  EventView.Dimensions.userDataFrame)
+                Spacer(minLength:  EventView.Dimensions.spacerLength)
                 VStack (alignment: .leading) {
                     Text(eventName)
                         .font(Font.custom(EventView.Fonts.jostRegular, size: EventView.Fonts.largeFontSize))
@@ -34,12 +34,12 @@ struct EventView: View {
                     HStack {
                         ForEach(characteristics, id: \.self) { characteristic in
                             Text(characteristic)
-                                .frame(width: CGFloat(characteristic.count *  6), height: EventView.Dimensions.characteristicFrameHeight)
+                                .frame(width: CGFloat(characteristic.count *  EventView.Dimensions.characteristicWidthMultiplier), height: EventView.Dimensions.characteristicFrameHeight)
                                 .font(Font.custom(EventView.Fonts.jostRegular, size: EventView.Fonts.regularFontSize))
                                 .lineLimit(1)
                                 .foregroundColor(.black)
                                 .background(ColorScheme.lemonYellow)
-                                .clipShape(RoundedRectangle(cornerRadius:  25))
+                                .clipShape(RoundedRectangle(cornerRadius:  EventView.Dimensions.characteristicCornerRadius))
                         }
                     }
                 }
@@ -60,6 +60,10 @@ extension EventView {
         static let frameHeight: CGFloat =  80
         static let cornerRadius: CGFloat =  13
         static let characteristicFrameHeight: CGFloat =  30
+        static let spacerLength: CGFloat = 5
+        static let userDataFrame: CGFloat = 100
+        static let characteristicCornerRadius: CGFloat = 25
+        static let characteristicWidthMultiplier: Int = 6
     }
     
     struct Fonts {
