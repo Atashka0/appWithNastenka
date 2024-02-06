@@ -21,21 +21,21 @@ struct EventView: View {
                     Text(username)
                         .lineLimit(1)
                         .multilineTextAlignment(.center)
-                        .font(Font.custom(EventView.Fonts.jostRegular, size: EventView.Fonts.regularFontSize))
+                        .font(Font.custom(FontNames.jostRegular, size: EventView.Fonts.regularFontSize))
                 }
                 .frame(width:  EventView.Dimensions.userDataFrame, height:  EventView.Dimensions.userDataFrame)
                 Spacer(minLength:  EventView.Dimensions.spacerLength)
                 VStack (alignment: .leading) {
                     Text(eventName)
-                        .font(Font.custom(EventView.Fonts.jostRegular, size: EventView.Fonts.largeFontSize))
+                        .font(Font.custom(FontNames.jostRegular, size: EventView.Fonts.largeFontSize))
                     Text(date)
-                        .font(Font.custom(EventView.Fonts.jostRegular, size: EventView.Fonts.regularFontSize))
-                    Spacer()
+                        .font(Font.custom(FontNames.jostRegular, size: EventView.Fonts.regularFontSize))
+                    Spacer(minLength: 10)
                     HStack {
                         ForEach(characteristics, id: \.self) { characteristic in
                             Text(characteristic)
                                 .frame(width: CGFloat(characteristic.count *  EventView.Dimensions.characteristicWidthMultiplier), height: EventView.Dimensions.characteristicFrameHeight)
-                                .font(Font.custom(EventView.Fonts.jostRegular, size: EventView.Fonts.regularFontSize))
+                                .font(Font.custom(FontNames.jostRegular, size: EventView.Fonts.regularFontSize))
                                 .lineLimit(1)
                                 .foregroundColor(.black)
                                 .background(ColorScheme.lemonYellow)
@@ -44,7 +44,7 @@ struct EventView: View {
                     }
                 }
             }
-            .frame(height: EventView.Dimensions.frameHeight)
+            .frame(width: EventView.Dimensions.frameWidth, height: EventView.Dimensions.frameHeight)
             .padding()
             .background(EventView.Colors.darkGray)
             .clipShape(RoundedRectangle(cornerRadius: EventView.Dimensions.cornerRadius))
@@ -56,9 +56,10 @@ extension EventView {
     }
     
     struct Dimensions {
+        static let frameWidth: CGFloat  = 355
         static let imageSize: CGFloat =  60
         static let frameHeight: CGFloat =  80
-        static let cornerRadius: CGFloat =  13
+        static let cornerRadius: CGFloat =  10
         static let characteristicFrameHeight: CGFloat =  30
         static let spacerLength: CGFloat = 5
         static let userDataFrame: CGFloat = 100
@@ -67,7 +68,6 @@ extension EventView {
     }
     
     struct Fonts {
-        static let jostRegular = "Jost-Regular"
         static let regularFontSize: CGFloat =  12
         static let largeFontSize: CGFloat =  20
     }

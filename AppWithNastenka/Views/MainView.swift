@@ -16,46 +16,53 @@ enum MainViewType: Int, CaseIterable {
 struct MainView: View {
     @State var selectedView: MainViewType = .list
     var body: some View {
-            VStack {
-                HStack {
-                    ForEach(MainViewType.allCases, id: \.rawValue) { item in
-                        ZStack {
-                            RoundedRectangle(cornerRadius:  MainView.Dimensions.tabViewCornerRadius)
-                                .fill(selectedView == item ? MainView.Colors.darkGray : MainView.Colors.black)
-                                .frame(width: MainView.Dimensions.tabWidth, height: MainView.Dimensions.tabHeight)
-                            
-                            Text(item.title)
-                                .frame(width: MainView.Dimensions.textWidth, height: MainView.Dimensions.textHeight)
-                        }
-                        .onTapGesture {
-                            withAnimation(.easeInOut) {
-                                self.selectedView = item
-                            }
+        
+        VStack {
+            HStack {
+                ForEach(MainViewType.allCases, id: \.rawValue) { item in
+                    ZStack {
+                        RoundedRectangle(cornerRadius:  MainView.Dimensions.tabViewCornerRadius)
+                            .fill(selectedView == item ? MainView.Colors.darkGray : MainView.Colors.black)
+                            .frame(width: MainView.Dimensions.tabWidth, height: MainView.Dimensions.tabHeight)
+                        
+                        
+                        Text(item.title)
+                            .frame(width: MainView.Dimensions.textWidth, height: MainView.Dimensions.textHeight)
+                            .font(Font.custom(FontNames.jostLight, size: MainView.Fonts.smallTextSize))
+                        
+                    }
+                    .padding(.leading, MainView.Dimensions.tabLeadingPadding)
+                    .padding(.trailing, MainView.Dimensions.tabTrailingPadding)
+                    .onTapGesture {
+                        withAnimation(.easeInOut) {
+                            self.selectedView = item
                         }
                     }
-                    Spacer()
-                    Image(systemName: MainView.Images.magnifyingGlass)
-                    Text("Invites")
-                }
-                ScrollView {
-                    VStack {
-                        EventView(username: "margo_april", eventName: "Halloween costume party", date: "October  31,  2023", characteristics: ["90's party", "90's inspired", "Best costume contest"])
-                        Spacer()
-                        EventView(username: "valeria_syropyatova", eventName: "Margo’s BD", date: "April  11,  2024", characteristics: ["90's party", "90's inspired", "Best costume contest"])
-                    }
+                    
                 }
                 Spacer()
-                HStack {
-                    Image(systemName: MainView.Images.plusCircle)
-                        .scaleEffect(MainView.Dimensions.imageScale)
+                Image(systemName: MainView.Images.magnifyingGlass)
+                Text("Invites")
+            }
+            ScrollView {
+                VStack {
+                    EventView(username: "margo_april", eventName: "Halloween costume party", date: "October  31,  2023", characteristics: ["90's party", "90's inspired", "Best costume contest"])
                     Spacer()
-                    Image(systemName: MainView.Images.circle)
-                        .scaleEffect(MainView.Dimensions.imageScale)
+                    EventView(username: "valeria_syropyatova", eventName: "Margo’s BD", date: "April  11,  2024", characteristics: ["90's party", "90's inspired", "Best costume contest"])
                 }
             }
-            .padding()
-            .font(Font.custom(MainView.Fonts.jostRegular, size: Fonts.globalTextSize))
+            Spacer()
+            HStack {
+                Image(systemName: MainView.Images.plusCircle)
+                    .scaleEffect(MainView.Dimensions.imageScale)
+                Spacer()
+                Image(systemName: MainView.Images.circle)
+                    .scaleEffect(MainView.Dimensions.imageScale)
+            }
         }
+        .padding()
+        .font(Font.custom(FontNames.jostRegular, size: Fonts.globalTextSize))
+    }
 }
 
 extension MainView {
@@ -65,8 +72,10 @@ extension MainView {
     }
     
     struct Dimensions {
+        static let tabLeadingPadding: CGFloat = -13
+        static let tabTrailingPadding: CGFloat = 10
         static let tabHeight: CGFloat =  35
-        static let tabWidth: CGFloat =  60
+        static let tabWidth: CGFloat =  50
         static let textHeight: CGFloat =  25
         static let textWidth: CGFloat =  30
         static let imageScale: CGSize = CGSize(width:  1.5, height:  1.5)
@@ -80,9 +89,9 @@ extension MainView {
     }
     
     struct Fonts {
-           static let jostRegular = "Jost-Regular"
-           static let globalTextSize: CGFloat =  16
-       }
+        static let globalTextSize: CGFloat =  16
+        static let smallTextSize: CGFloat = 13
+    }
 }
 
 
