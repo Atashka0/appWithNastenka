@@ -28,7 +28,7 @@ struct MainView: View {
                         
                         Text(item.title)
                             .frame(width: MainView.Dimensions.textWidth, height: MainView.Dimensions.textHeight)
-                            .font(Font.custom(FontNames.jostLight, size: MainView.Fonts.smallTextSize))
+                            .font(Font.custom(FontNames.jostLight, size: GlobalConstants.smallFontSize))
                         
                     }
                     .padding(.leading, MainView.Dimensions.tabLeadingPadding)
@@ -61,7 +61,7 @@ struct MainView: View {
             }
         }
         .padding()
-        .font(Font.custom(FontNames.jostRegular, size: Fonts.globalTextSize))
+        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.textSize))
     }
 }
 
@@ -86,11 +86,6 @@ extension MainView {
         static let magnifyingGlass = "magnifyingglass"
         static let plusCircle = "plus.circle"
         static let circle = "circle"
-    }
-    
-    struct Fonts {
-        static let globalTextSize: CGFloat =  16
-        static let smallTextSize: CGFloat = 13
     }
 }
 

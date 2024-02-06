@@ -1,11 +1,4 @@
-//
-//  EventView.swift
-//  AppWithNastenka
-//
-//  Created by Ilyas Kudaibergenov on 05.02.2024.
-//
 import SwiftUI
-import Foundation
 
 struct EventView: View {
     var username: String
@@ -21,21 +14,21 @@ struct EventView: View {
                     Text(username)
                         .lineLimit(1)
                         .multilineTextAlignment(.center)
-                        .font(Font.custom(FontNames.jostRegular, size: EventView.Fonts.regularFontSize))
+                        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.smallFontSize))
                 }
                 .frame(width:  EventView.Dimensions.userDataFrame, height:  EventView.Dimensions.userDataFrame)
                 Spacer(minLength:  EventView.Dimensions.spacerLength)
                 VStack (alignment: .leading) {
                     Text(eventName)
-                        .font(Font.custom(FontNames.jostRegular, size: EventView.Fonts.largeFontSize))
+                        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.largeFontSize))
                     Text(date)
-                        .font(Font.custom(FontNames.jostRegular, size: EventView.Fonts.regularFontSize))
+                        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.smallFontSize))
                     Spacer(minLength: 10)
                     HStack {
                         ForEach(characteristics, id: \.self) { characteristic in
                             Text(characteristic)
                                 .frame(width: CGFloat(characteristic.count *  EventView.Dimensions.characteristicWidthMultiplier), height: EventView.Dimensions.characteristicFrameHeight)
-                                .font(Font.custom(FontNames.jostRegular, size: EventView.Fonts.regularFontSize))
+                                .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.smallFontSize))
                                 .lineLimit(1)
                                 .foregroundColor(.black)
                                 .background(ColorScheme.lemonYellow)
@@ -65,11 +58,6 @@ extension EventView {
         static let userDataFrame: CGFloat = 100
         static let characteristicCornerRadius: CGFloat = 25
         static let characteristicWidthMultiplier: Int = 6
-    }
-    
-    struct Fonts {
-        static let regularFontSize: CGFloat =  12
-        static let largeFontSize: CGFloat =  20
     }
     
     struct Images {
