@@ -3,4 +3,5 @@ public enum Route: Hashable {
     case yellow
     case reg
     case login
+    case main
 }

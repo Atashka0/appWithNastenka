@@ -8,6 +8,7 @@ extension Route {
         case .yellow: YellowView()
         case .reg: RegistrationView()
         case .login: LoginView()
+        case .main: MainView()
         }
     }
 }
