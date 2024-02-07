@@ -48,7 +48,7 @@ struct RegistrationView: View {
                     }
                 }
                 Text(passwordMismatch ? "Passwords do not match" : "")
-                    .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.textSize))
+                    .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
                     .foregroundColor(.red)
                 Button {
                     stateStore.dispatch(AuthAction.registerUser(email, username, password))
@@ -63,12 +63,12 @@ struct RegistrationView: View {
                 Divider()
                 HStack {
                     Text("Already have an account?")
-                        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.textSize))
+                        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
                     Button {
                         stateStore.dispatch(NavigationAction.push(.login))
                     } label: {
                         Text("Sign In")
-                            .font(Font.custom(FontNames.jostSemiBold, size: GlobalConstants.textSize))
+                            .font(Font.custom(FontNames.jostSemiBold, size: GlobalConstants.fontSize))
                     }
                 }
                 .foregroundColor(ColorScheme.grayAndWhite)
@@ -90,7 +90,7 @@ struct RegistrationView_Previews: PreviewProvider {
 public struct ButtonModifier: ViewModifier {
     public func body(content: Content) -> some View {
         content
-            .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.textSize))
+            .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
             .frame(minWidth: 0, maxWidth: .infinity)
             .frame(height: RegLogConstants.buttonHeight)
             .foregroundColor(.black)

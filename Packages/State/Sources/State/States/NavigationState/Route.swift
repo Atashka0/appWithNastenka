@@ -1,5 +1,6 @@
 public enum Route: Hashable {
-    case reg
+    case register
     case login
     case main
+    case createEvent
 }

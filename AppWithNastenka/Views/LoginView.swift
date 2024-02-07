@@ -41,7 +41,7 @@ struct LoginView: View {
                     stateStore.dispatch(NavigationAction.setPath([]))
                 } label: {
                     Text("Forgot your password?")
-                        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.textSize))
+                        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
                         .font(.footnote)
                         .foregroundColor(.gray)
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -53,12 +53,12 @@ struct LoginView: View {
                 Divider()
                 HStack {
                     Text("Don't have an account?")
-                        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.textSize))
+                        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
                     Button {
                         stateStore.dispatch(NavigationAction.pop)
                     } label: {
                         Text("Sign Up")
-                            .font(Font.custom(FontNames.jostSemiBold, size: GlobalConstants.textSize))
+                            .font(Font.custom(FontNames.jostSemiBold, size: GlobalConstants.fontSize))
                     }
                 }
                 .foregroundColor(ColorScheme.grayAndWhite)

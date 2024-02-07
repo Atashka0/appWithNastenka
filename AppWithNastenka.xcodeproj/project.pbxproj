@@ -33,6 +33,10 @@
 		FEC781362AE6EE5200EC303B /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC781352AE6EE5200EC303B /* ColorScheme.swift */; };
 		FEE906952ADF0A46009104D3 /* Jost-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEE9068B2ADF08F5009104D3 /* Jost-Regular.ttf */; };
 		FEE906962ADF0B29009104D3 /* Jost-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEE906812ADF08F5009104D3 /* Jost-Bold.ttf */; };
+		FEE906982ADF0BEA009104D3 /* Jost-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEE906972ADF0BEA009104D3 /* Jost-Black.ttf */; };
+		FEE9069A2ADF0BFA009104D3 /* Jost-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEE906992ADF0BFA009104D3 /* Jost-SemiBold.ttf */; };
+		FEF1323C2AFE402500B15F03 /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF1323B2AFE402500B15F03 /* CreateEventView.swift */; };
+		FEF1323E2AFE504400B15F03 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF1323D2AFE504300B15F03 /* EventManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +70,10 @@
 		FEE9068B2ADF08F5009104D3 /* Jost-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Regular.ttf"; sourceTree = "<group>"; };
 		FEE9068D2ADF08F5009104D3 /* Jost-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Light.ttf"; sourceTree = "<group>"; };
 		FEE9068E2ADF08F5009104D3 /* Jost-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Italic.ttf"; sourceTree = "<group>"; };
+		FEE906972ADF0BEA009104D3 /* Jost-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Black.ttf"; path = "../../../../../../Downloads/Jost/static/Jost-Black.ttf"; sourceTree = "<group>"; };
+		FEE906992ADF0BFA009104D3 /* Jost-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-SemiBold.ttf"; path = "../../../../../../Downloads/Jost/static/Jost-SemiBold.ttf"; sourceTree = "<group>"; };
+		FEF1323B2AFE402500B15F03 /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
+		FEF1323D2AFE504300B15F03 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +125,7 @@
 				FE3DCF8C2AB7553A001E3F06 /* RegistrationView.swift */,
 				FE3DCF962AB76B2D001E3F06 /* LoginView.swift */,
 				FEC30A052B70E679008BE456 /* EventView.swift */,
+				FEF1323B2AFE402500B15F03 /* CreateEventView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -206,6 +215,7 @@
 				FEB960A52AA907DA00882488 /* Assets.xcassets */,
 				FE9401E02AD3DA8D0019C2DC /* BrandBook */,
 				FEB960A72AA907DA00882488 /* Preview Content */,
+				FEF1323D2AFE504300B15F03 /* EventManager.swift */,
 			);
 			path = AppWithNastenka;
 			sourceTree = "<group>";
@@ -315,6 +325,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				093086122AAA0C880038A014 /* MainView.swift in Sources */,
+				FEF1323E2AFE504400B15F03 /* EventManager.swift in Sources */,
+				093086122AAA0C880038A014 /* BlueView.swift in Sources */,
+				FEB960A42AA907D800882488 /* YellowView.swift in Sources */,
 				FE9401E42AD3DE5E0019C2DC /* GlobalConstants.swift in Sources */,
 				FEC30A062B70E679008BE456 /* EventView.swift in Sources */,
 				093086102AAA0C0C0038A014 /* Route+View.swift in Sources */,
@@ -331,6 +344,7 @@
 				FEB960A22AA907D800882488 /* App.swift in Sources */,
 				093086222AB041D00038A014 /* AuthController.swift in Sources */,
 				0930861B2AAF4F840038A014 /* StateStore.swift in Sources */,
+				FEF1323C2AFE402500B15F03 /* CreateEventView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

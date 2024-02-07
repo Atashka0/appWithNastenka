@@ -60,7 +60,7 @@ struct MainView: View {
             }
         }
         .padding()
-        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.textSize))
+        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
     }
 }
 
@@ -87,8 +87,8 @@ extension MainView {
 }
 
 
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-    }
-}
+//struct MainView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainView()
+//    }
+//}
