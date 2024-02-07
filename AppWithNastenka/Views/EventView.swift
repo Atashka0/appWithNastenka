@@ -1,17 +1,14 @@
 import SwiftUI
 
 struct EventView: View {
-    var username: String
-    var eventName: String
-    var date: String
-    var characteristics: [String] = []
+    var event: Event
     var body: some View {
             HStack {
                 VStack (alignment: .center) {
                     Image(systemName: EventView.Images.circleFill)
                         .resizable()
                         .frame(width: EventView.Dimensions.imageSize, height: EventView.Dimensions.imageSize)
-                    Text(username)
+                    Text(event.username)
                         .lineLimit(1)
                         .multilineTextAlignment(.center)
                         .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.smallFontSize))
@@ -19,13 +16,13 @@ struct EventView: View {
                 .frame(width:  EventView.Dimensions.userDataFrame, height:  EventView.Dimensions.userDataFrame)
                 Spacer(minLength:  EventView.Dimensions.spacerLength)
                 VStack (alignment: .leading) {
-                    Text(eventName)
+                    Text(event.name)
                         .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.largeFontSize))
-                    Text(date)
+                    Text(event.date)
                         .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.smallFontSize))
                     Spacer(minLength: 10)
                     HStack {
-                        ForEach(characteristics, id: \.self) { characteristic in
+                        ForEach(event.characteristics, id: \.self) { characteristic in
                             Text(characteristic)
                                 .frame(width: CGFloat(characteristic.count *  EventView.Dimensions.characteristicWidthMultiplier), height: EventView.Dimensions.characteristicFrameHeight)
                                 .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.smallFontSize))
@@ -69,7 +66,7 @@ extension EventView {
 
 struct EventView_Previews: PreviewProvider {
     static var previews: some View {
-        EventView(username: "margo", eventName: "Halloween costume party", date: "April 11, 2024", characteristics: ["90's party", "90's inspired", "Best costume contest"])
+        EventView(event: Event(username: "margo", name: "Halloween costume party", date: "April 11, 2024", characteristics: ["90's party", "90's inspired", "Best costume contest"]))
 
     }
 }

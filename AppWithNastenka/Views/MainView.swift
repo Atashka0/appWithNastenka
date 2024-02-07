@@ -16,13 +16,12 @@ enum MainViewType: Int, CaseIterable {
 struct MainView: View {
     @State var selectedView: MainViewType = .list
     var body: some View {
-        
         VStack {
             HStack {
                 ForEach(MainViewType.allCases, id: \.rawValue) { item in
                     ZStack {
                         RoundedRectangle(cornerRadius:  MainView.Dimensions.tabViewCornerRadius)
-                            .fill(selectedView == item ? MainView.Colors.darkGray : MainView.Colors.black)
+                            .fill(selectedView == item ? MainView.Colors.darkGray : Color.black)
                             .frame(width: MainView.Dimensions.tabWidth, height: MainView.Dimensions.tabHeight)
                         
                         
@@ -46,9 +45,9 @@ struct MainView: View {
             }
             ScrollView {
                 VStack {
-                    EventView(username: "margo_april", eventName: "Halloween costume party", date: "October  31,  2023", characteristics: ["90's party", "90's inspired", "Best costume contest"])
+                    EventView(event: Event(username: "margo_april", name: "Halloween costume party", date: "October  31,  2023", characteristics: ["90's party", "90's inspired", "Best costume contest"]))
                     Spacer()
-                    EventView(username: "valeria_syropyatova", eventName: "Margo’s BD", date: "April  11,  2024", characteristics: ["90's party", "90's inspired", "Best costume contest"])
+                    EventView(event: Event(username: "valeria_syropyatova", name: "Margo’s BD", date: "April  11,  2024", characteristics: ["90's party", "90's inspired", "Best costume contest"]))
                 }
             }
             Spacer()
@@ -68,7 +67,6 @@ struct MainView: View {
 extension MainView {
     struct Colors {
         static let darkGray = Color(red:  18/256, green:  18/256, blue:  18/256)
-        static let black = Color.black
     }
     
     struct Dimensions {
