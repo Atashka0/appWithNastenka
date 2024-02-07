@@ -18,7 +18,7 @@ func navigationReducer(action: Action, state: NavigationState?) -> NavigationSta
         state.path = [route]
     case NavigationAction.setPath(let path):
         state.path = path
-        state.root = path.first ?? .yellow
+        state.root = path.first ?? .main
     default:
         break
     }

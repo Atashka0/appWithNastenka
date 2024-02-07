@@ -5,7 +5,7 @@ import SwiftUI
 
 /// Получает обновление стейта и публикует обновленные переменные.
 final class NavigationController: ObservableObject {
-    @Published var root: Route = .yellow
+    @Published var root: Route = .main
     @Published var path: [Route] = [] {
         willSet {
             if newValue != pathInState {
@@ -18,7 +18,7 @@ final class NavigationController: ObservableObject {
     
     @ViewBuilder
     func view(for route: Route) -> some View {
-        route.view
+        route.view.navigationBarBackButtonHidden()
     }
     
     deinit {
