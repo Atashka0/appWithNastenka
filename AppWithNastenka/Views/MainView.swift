@@ -20,7 +20,7 @@ struct MainView: View {
             HStack {
                 ForEach(MainViewType.allCases, id: \.rawValue) { item in
                     ZStack {
-                        RoundedRectangle(cornerRadius:  MainView.Dimensions.tabViewCornerRadius)
+                        RoundedRectangle(cornerRadius:  GlobalConstants.defaultCornerRadius)
                             .fill(selectedView == item ? MainView.Colors.darkGray : Color.black)
                             .frame(width: MainView.Dimensions.tabWidth, height: MainView.Dimensions.tabHeight)
                         
@@ -77,7 +77,6 @@ extension MainView {
         static let textHeight: CGFloat =  25
         static let textWidth: CGFloat =  30
         static let imageScale: CGSize = CGSize(width:  1.5, height:  1.5)
-        static let tabViewCornerRadius: CGFloat = 10
     }
     
     struct Images {

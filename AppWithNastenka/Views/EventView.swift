@@ -37,7 +37,7 @@ struct EventView: View {
             .frame(width: EventView.Dimensions.frameWidth, height: EventView.Dimensions.frameHeight)
             .padding()
             .background(EventView.Colors.darkGray)
-            .clipShape(RoundedRectangle(cornerRadius: EventView.Dimensions.cornerRadius))
+            .clipShape(RoundedRectangle(cornerRadius: GlobalConstants.defaultCornerRadius))
         }}
 
 extension EventView {
@@ -49,7 +49,6 @@ extension EventView {
         static let frameWidth: CGFloat  = 355
         static let imageSize: CGFloat =  60
         static let frameHeight: CGFloat =  80
-        static let cornerRadius: CGFloat =  10
         static let characteristicFrameHeight: CGFloat =  30
         static let spacerLength: CGFloat = 5
         static let userDataFrame: CGFloat = 100
