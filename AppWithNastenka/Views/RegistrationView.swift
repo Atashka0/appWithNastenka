@@ -13,6 +13,14 @@ struct RegistrationView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: geometry.size.height * RegLogConstants.verticalSpacing) {
+                HStack {
+                    Spacer()
+                    Button {
+                        stateStore.dispatch(NavigationAction.setPath([]))
+                    } label: {
+                        Image(AssetNames.closeCross)
+                    }
+                }
                 Image(AssetNames.logo)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -22,20 +30,22 @@ struct RegistrationView: View {
                     )
                     .padding(.vertical, geometry.size.height * RegLogConstants.logoVerticalPadding)
                     .foregroundColor(Color("black-lemonYellow"))
-                TextField("Email",text: $email)
+                VStack {
+                    TextField("Email",text: $email)
+                        .modifier(TextFieldModifier())
+                    TextField("Username",text: $username)
+                        .modifier(TextFieldModifier())
+                    CustomSecureField(placeholder: "Password", rightView: AssetNames.eye, text: $password)
+                        .modifier(TextFieldModifier())
+                    CustomSecureField(
+                        placeholder: "Confirm Password",
+                        rightView: AssetNames.eye,
+                        text: $passwordVerification
+                    )
                     .modifier(TextFieldModifier())
-                TextField("Username",text: $username)
-                    .modifier(TextFieldModifier())
-                CustomSecureField(placeholder: "Password", rightView: AssetNames.eye, text: $password)
-                    .modifier(TextFieldModifier())
-                CustomSecureField(
-                    placeholder: "Confirm Password",
-                    rightView: AssetNames.eye,
-                    text: $passwordVerification
-                )
-                .modifier(TextFieldModifier())
-                .onReceive(Just(passwordVerification)) { _ in
-                    passwordMismatch = password != passwordVerification
+                    .onReceive(Just(passwordVerification)) { _ in
+                        passwordMismatch = password != passwordVerification
+                    }
                 }
                 Text(passwordMismatch ? "Passwords do not match" : "")
                     .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.textSize))

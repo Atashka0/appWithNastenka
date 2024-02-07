@@ -8,6 +8,14 @@ struct LoginView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: geometry.size.height * RegLogConstants.verticalSpacing) {
+                HStack {
+                    Spacer()
+                    Button {
+                        stateStore.dispatch(NavigationAction.setPath([]))
+                    } label: {
+                        Image(AssetNames.closeCross)
+                    }
+                }
                 Image(AssetNames.logo)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -30,7 +38,7 @@ struct LoginView: View {
                 }
                 
                 Button {
-                    stateStore.dispatch(NavigationAction.push(.blue))
+                    stateStore.dispatch(NavigationAction.setPath([]))
                 } label: {
                     Text("Forgot your password?")
                         .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.textSize))

@@ -4,6 +4,7 @@ import State
 @main
 struct AppWithNastenkaApp: App {
     @StateObject var navigationController = NavigationController()
+    @StateObject var authController = AuthController()
 
     var body: some Scene {
         WindowGroup {
@@ -12,7 +13,15 @@ struct AppWithNastenkaApp: App {
                     .navigationDestination(for: Route.self, destination: navigationController.view)
             }
             .onAppear {
+                let dispatchGroup = DispatchGroup()
+                dispatchGroup.notify(queue: DispatchQueue.main) {
+                    if authController.user.data == nil {
+                        stateStore.dispatch(NavigationAction.push(.reg))
+                    }
+                }
+                dispatchGroup.enter()
                 navigationController.subscribe()
+                dispatchGroup.leave()
             }
         }
     }
