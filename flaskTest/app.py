@@ -75,33 +75,33 @@ def delete_user(id):
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8080)
 
-# @app.route("/newEvent", methods=["POST"])
-# def create_event():
-#     data = request.json
+@app.route("/newEvent", methods=["POST"])
+def create_event():
+    data = request.json
 
-#     if not data or "organizer_id" not in data or "place" not in data or "name" not in data or "description" not in data or "characteristics" not in data or "guests" not in data:
-#         return jsonify({"error": "Invalid data format"}), 400
+    if not data or "organizer_id" not in data or "place" not in data or "name" not in data or "description" not in data or "characteristics" not in data or "guests" not in data:
+        return jsonify({"error": "Invalid data format"}), 400
 
-#     event = Event(
-#         organizer_id=data["organizer_id"],
-#         place=data["place"],
-#         name=data["name"],
-#         description=data["description"]
-#     )
+    event = Event(
+        organizer_id=data["organizer_id"],
+        place=data["place"],
+        name=data["name"],
+        description=data["description"]
+    )
 
-#     for characteristic in data["characteristics"]:
-#         event.characteristics.append(Characteristic(
-#             name=characteristic["name"],
-#             description=characteristic["description"]
-#         ))
+    for characteristic in data["characteristics"]:
+        event.characteristics.append(Characteristic(
+            name=characteristic["name"],
+            description=characteristic["description"]
+        ))
 
-#     for guest in data["guests"]:
-#         event.guests.append(Guest(
-#             user_id=guest["user_id"],
-#             status=guest["status"]
-#         ))
+    for guest in data["guests"]:
+        event.guests.append(Guest(
+            user_id=guest["user_id"],
+            status=guest["status"]
+        ))
 
-#     db.session.add(event)
-#     db.session.commit()
+    db.session.add(event)
+    db.session.commit()
 
-#     return jsonify(event.to_dict()), 201
+    return jsonify(event.to_dict()), 201
