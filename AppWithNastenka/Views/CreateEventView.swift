@@ -75,19 +75,37 @@ struct CreateEventView: View {
                     Text("Characteristics")
                         .font(Font.custom(FontNames.jostRegular, size: 20))
                     ForEach(0..<characteristics.count, id: \.self) { index in
-                        VStack {
-                            TextField("For example, “Theme”", text: $characteristics[index].name)
-                                .modifier(TextFieldModifier(strokeColor: Color.clear))
-                                .background(Color.black)
-                            TextField("For example, “90’s party”", text: $characteristics[index].description)
-                                .foregroundStyle(Color.black)
-                                .modifier(TextFieldModifier(strokeColor: Color.clear))
-                                .background(Color.black)
+                        if (characteristics.last?.description != "" || characteristics.last?.name != "") {
+                            ZStack {
+                                VStack {
+                                    TextField("For example, “Theme”", text: $characteristics[index].name)
+                                        .modifier(TextFieldModifier(strokeColor: Color.clear))
+                                        .background(Color.black)
+                                    TextField("For example, “90’s party”", text: $characteristics[index].description)
+                                        .foregroundStyle(Color.black)
+                                        .modifier(TextFieldModifier(strokeColor: Color.clear))
+                                        .background(Color.black)
+                                }
+                            }
+                            .padding()
+                            .background(MainView.Colors.darkGray)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .padding(.horizontal)
+                        } else {
+                            VStack {
+                                TextField("For example, “Theme”", text: $characteristics[index].name)
+                                    .modifier(TextFieldModifier(strokeColor: Color.clear))
+                                    .background(Color.black)
+                                TextField("For example, “90’s party”", text: $characteristics[index].description)
+                                    .foregroundStyle(Color.black)
+                                    .modifier(TextFieldModifier(strokeColor: Color.clear))
+                                    .background(Color.black)
+                            }
+                            .padding()
+                            .background(MainView.Colors.darkGray)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .padding(.horizontal)
                         }
-                        .padding()
-                        .background(MainView.Colors.darkGray)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .padding(.horizontal)
                     }
 //                    Button(action: {
 //                        characteristics.append(("", ""))
