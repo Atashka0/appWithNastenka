@@ -38,6 +38,7 @@ struct TextArea: View {
                     .padding(.vertical, 12)
             }
             TextEditor(text: $text)
+                .foregroundStyle(.white)
                 .padding(4)
         }
         .overlay(RoundedRectangle(

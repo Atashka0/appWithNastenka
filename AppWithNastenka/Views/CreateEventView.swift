@@ -29,7 +29,7 @@ struct CreateEventView: View {
     
     var body: some View {
         ZStack {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading) {
                     HStack {
                         ForEach(EventType.allCases, id: \.rawValue) { type in
@@ -75,7 +75,7 @@ struct CreateEventView: View {
                     Text("Characteristics")
                         .font(Font.custom(FontNames.jostRegular, size: 20))
                     ForEach(0..<characteristics.count, id: \.self) { index in
-                        if (characteristics.last?.description != "" || characteristics.last?.name != "") {
+                        if (characteristics[index].description != "" || characteristics[index].name != "") {
                             ZStack {
                                 VStack {
                                     TextField("For example, “Theme”", text: $characteristics[index].name)
@@ -86,11 +86,23 @@ struct CreateEventView: View {
                                         .modifier(TextFieldModifier(strokeColor: Color.clear))
                                         .background(Color.black)
                                 }
+                                .padding()
+                                .background(MainView.Colors.darkGray)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .padding(.horizontal)
+                                Image("closeCross")
+                                    .resizable()
+                                    .frame(width: 15, height: 15)
+                                    .aspectRatio(contentMode: .fit)
+                                    .foregroundStyle(.white)
+                                    .offset(x: 160, y: -60)
+                                    .onTapGesture {
+                                        characteristics.remove(at: index)
+                                    }
                             }
-                            .padding()
-                            .background(MainView.Colors.darkGray)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .padding(.horizontal)
+                            .onTapGesture {
+                                characteristics.append(("", ""))
+                            }
                         } else {
                             VStack {
                                 TextField("For example, “Theme”", text: $characteristics[index].name)
@@ -107,14 +119,14 @@ struct CreateEventView: View {
                             .padding(.horizontal)
                         }
                     }
-//                    Button(action: {
-//                        characteristics.append(("", ""))
-//                    }) {
-//                        Image(systemName: "plus.circle.fill")
-//                            .font(.system(size: 20))
-//                            .foregroundColor(ColorScheme.blackAndLemonYellow)
-//                    }
-//                    .padding(.horizontal)
+                    //                    Button(action: {
+                    //                        characteristics.append(("", ""))
+                    //                    }) {
+                    //                        Image(systemName: "plus.circle.fill")
+                    //                            .font(.system(size: 20))
+                    //                            .foregroundColor(ColorScheme.blackAndLemonYellow)
+                    //                    }
+                    //                    .padding(.horizontal)
                 }
                 Spacer()
                 
