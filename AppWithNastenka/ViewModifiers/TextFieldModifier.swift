@@ -16,9 +16,8 @@ struct TextFieldModifier: ViewModifier {
 }
 
 private struct Constants {
-    static let textFieldBorderLineWidth: CGFloat = 3
+    static let textFieldBorderLineWidth: CGFloat =  3
 }
-
 
 struct TextArea: View {
     @Binding var text: String
@@ -27,24 +26,27 @@ struct TextArea: View {
     init(placeholder: String, text: Binding<String>) {
         self.placeholder = placeholder
         self._text = text
-        UITextView.appearance().backgroundColor = .black
+        UITextView.appearance().backgroundColor = .clear
     }
+    
     var body: some View {
-        ZStack (alignment: .topLeading) {
-            if text.isEmpty {
-                Text(placeholder)
-                    .foregroundStyle(Color(uiColor: .systemGray6))
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 12)
-            }
+        ZStack(alignment: .topLeading) {
             TextEditor(text: $text)
                 .foregroundStyle(.white)
-                .padding(4)
+            if text.isEmpty {
+                Text(placeholder)
+                    .padding(.vertical,  12)
+                    .foregroundStyle(Color(.systemGray3))
+            }
         }
-        .overlay(RoundedRectangle(
-            cornerRadius: GlobalConstants.textFieldCornerRadius
-        ).stroke(Color(uiColor: .systemGray6), lineWidth: 2))
+        .padding(.horizontal,  16)
+        .overlay(RoundedRectangle(cornerRadius: 5)
+            .stroke(ColorScheme.darkGray, lineWidth: 2))
     }
 }
 
+
+#Preview {
+    TextArea(placeholder: "Description", text: .constant(""))
+}
 

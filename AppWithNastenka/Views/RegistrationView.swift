@@ -19,6 +19,7 @@ struct RegistrationView: View {
                         stateStore.dispatch(NavigationAction.setPath([]))
                     } label: {
                         Image(AssetNames.closeCross)
+                            .foregroundStyle(Color.gray)
                     }
                 }
                 Image(AssetNames.logo)

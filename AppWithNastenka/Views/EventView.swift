@@ -14,17 +14,18 @@ struct EventView: View {
                         .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.smallFontSize))
                 }
                 .frame(width:  EventView.Dimensions.userDataFrame, height:  EventView.Dimensions.userDataFrame)
-                Spacer(minLength:  EventView.Dimensions.spacerLength)
+                Spacer()
+                    .frame(width: EventView.Dimensions.spacerLength)
                 VStack (alignment: .leading) {
                     Text(event.name)
                         .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.largeFontSize))
                     Text(event.date)
                         .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.smallFontSize))
-                    Spacer(minLength: 10)
+                    Spacer()
                     HStack {
                         ForEach(event.characteristics, id: \.self) { characteristic in
-                            Text(characteristic)
-                                .frame(width: CGFloat(characteristic.count *  EventView.Dimensions.characteristicWidthMultiplier), height: EventView.Dimensions.characteristicFrameHeight)
+                            Text(characteristic.name)
+                                .frame(width: CGFloat(characteristic.name.count *  EventView.Dimensions.characteristicWidthMultiplier), height: EventView.Dimensions.characteristicFrameHeight)
                                 .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.smallFontSize))
                                 .lineLimit(1)
                                 .foregroundColor(.black)
@@ -34,7 +35,7 @@ struct EventView: View {
                     }
                 }
             }
-            .frame(width: EventView.Dimensions.frameWidth, height: EventView.Dimensions.frameHeight)
+            .frame(width: EventView.Dimensions.frameWidth, height: EventView.Dimensions.frameHeight, alignment: .leading)
             .padding()
             .background(EventView.Colors.darkGray)
             .clipShape(RoundedRectangle(cornerRadius: GlobalConstants.defaultCornerRadius))
@@ -65,7 +66,7 @@ extension EventView {
 
 struct EventView_Previews: PreviewProvider {
     static var previews: some View {
-        EventView(event: Event(username: "margo", name: "Halloween costume party", date: "April 11, 2024", characteristics: ["90's party", "90's inspired", "Best costume contest"]))
+        EventView(event: Event(username: "margo", name: "margo", date: "April 11, 2024", characteristics: [Characteristic(name: "90's party", description: "blabla")]))
 
     }
 }

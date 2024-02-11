@@ -14,6 +14,7 @@ struct LoginView: View {
                         stateStore.dispatch(NavigationAction.setPath([]))
                     } label: {
                         Image(AssetNames.closeCross)
+                            .foregroundStyle(.gray)
                     }
                 }
                 Image(AssetNames.logo)

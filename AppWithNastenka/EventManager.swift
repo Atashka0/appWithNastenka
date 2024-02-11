@@ -1,23 +1,16 @@
-//
-//  EventManager.swift
-//  AppWithNastenka
-//
-//  Created by Ilyas Kudaibergenov on 10.11.2023.
-//
-
 import Foundation
 import State
 import AuthManager
 
 public class EventManager {
-    public func newEvent(place: String, eventName: String, eventDescription: String, characteristics: [(name: String, description: String)], participants: [User]) {
+    public func newEvent(event: Event) {
         
         let parameters: [String: Any] = [
-            "place": place,
-            "eventName": eventName,
-            "eventDescription": eventDescription,
-            "characteristics": characteristics.map { ["name": $0.name, "description": $0.description] },
-            "participants": participants.map { ["id": $0.id, "email": $0.email, "username": $0.username] }
+            "place": event.place,
+            "eventName": event.name,
+            "eventDescription": event.description,
+            "characteristics": event.characteristics.map { ["name": $0.name, "description": $0.description] },
+            "participants": event.participants.map { ["id": $0.id, "email": $0.email, "username": $0.username] }
         ]
 
         guard let jsonData = try? JSONSerialization.data(withJSONObject: parameters) else {
