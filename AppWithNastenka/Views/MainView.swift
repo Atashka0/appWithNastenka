@@ -21,7 +21,7 @@ struct MainView: View {
                 ForEach(MainViewType.allCases, id: \.rawValue) { item in
                     ZStack {
                         RoundedRectangle(cornerRadius:  GlobalConstants.defaultCornerRadius)
-                            .fill(selectedView == item ? MainView.Colors.darkGray : Color.black)
+                            .fill(selectedView == item ? ColorScheme.darkGray : Color.black)
                             .frame(width: MainView.Dimensions.tabWidth, height: MainView.Dimensions.tabHeight)
                         
                         
@@ -45,30 +45,29 @@ struct MainView: View {
             }
             ScrollView {
                 VStack {
-                    EventView(event: Event(username: "margo_april", name: "Halloween costume party", date: "October  31,  2023", characteristics: ["90's party", "90's inspired", "Best costume contest"]))
+                    EventView(event: Event(username: "margo_april", name: "Halloween costume party", date: "October  31,  2023", characteristics: [Characteristic(name: "90's party", description: "blabla")]))
                     Spacer()
-                    EventView(event: Event(username: "valeria_syropyatova", name: "Margo’s BD", date: "April  11,  2024", characteristics: ["90's party", "90's inspired", "Best costume contest"]))
+                    EventView(event: Event(username: "valeria_syropyatova", name: "Margo’s BD", date: "April  11,  2024", characteristics: [Characteristic(name: "90's party", description: "blabla")]))
                 }
             }
             Spacer()
             HStack {
                 Image(systemName: MainView.Images.plusCircle)
                     .scaleEffect(MainView.Dimensions.imageScale)
+                    .onTapGesture {
+                        stateStore.dispatch(NavigationAction.push(.createEvent))
+                    }
                 Spacer()
                 Image(systemName: MainView.Images.circle)
                     .scaleEffect(MainView.Dimensions.imageScale)
             }
         }
         .padding()
-        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.textSize))
+        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
     }
 }
 
 extension MainView {
-    struct Colors {
-        static let darkGray = Color(red:  18/256, green:  18/256, blue:  18/256)
-    }
-    
     struct Dimensions {
         static let tabLeadingPadding: CGFloat = -13
         static let tabTrailingPadding: CGFloat = 10

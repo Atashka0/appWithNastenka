@@ -16,8 +16,6 @@
 		0930861D2AAF50340038A014 /* AuthManager in Frameworks */ = {isa = PBXBuildFile; productRef = 0930861C2AAF50340038A014 /* AuthManager */; };
 		0930861F2AAF50380038A014 /* Middleware in Frameworks */ = {isa = PBXBuildFile; productRef = 0930861E2AAF50380038A014 /* Middleware */; };
 		093086222AB041D00038A014 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093086212AB041D00038A014 /* AuthController.swift */; };
-		097B21A92B6D04A8001CED48 /* Jost-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 097B21A72B6D04A8001CED48 /* Jost-SemiBold.ttf */; };
-		097B21AA2B6D04A8001CED48 /* Jost-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 097B21A82B6D04A8001CED48 /* Jost-Black.ttf */; };
 		FE3DCF8D2AB7553A001E3F06 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DCF8C2AB7553A001E3F06 /* RegistrationView.swift */; };
 		FE3DCF932AB757AE001E3F06 /* TextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DCF922AB757AE001E3F06 /* TextFieldModifier.swift */; };
 		FE3DCF972AB76B2D001E3F06 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DCF962AB76B2D001E3F06 /* LoginView.swift */; };
@@ -33,6 +31,8 @@
 		FEC781362AE6EE5200EC303B /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC781352AE6EE5200EC303B /* ColorScheme.swift */; };
 		FEE906952ADF0A46009104D3 /* Jost-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEE9068B2ADF08F5009104D3 /* Jost-Regular.ttf */; };
 		FEE906962ADF0B29009104D3 /* Jost-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEE906812ADF08F5009104D3 /* Jost-Bold.ttf */; };
+		FEF1323C2AFE402500B15F03 /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF1323B2AFE402500B15F03 /* CreateEventView.swift */; };
+		FEF1323E2AFE504400B15F03 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF1323D2AFE504300B15F03 /* EventManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,8 +45,6 @@
 		093086192AAF44130038A014 /* AuthManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AuthManager; sourceTree = "<group>"; };
 		0930861A2AAF4F840038A014 /* StateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStore.swift; sourceTree = "<group>"; };
 		093086212AB041D00038A014 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
-		097B21A72B6D04A8001CED48 /* Jost-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-SemiBold.ttf"; path = "../../../../../Downloads/Jost/static/Jost-SemiBold.ttf"; sourceTree = "<group>"; };
-		097B21A82B6D04A8001CED48 /* Jost-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Black.ttf"; path = "../../../../../Downloads/Jost/static/Jost-Black.ttf"; sourceTree = "<group>"; };
 		FE3DCF8C2AB7553A001E3F06 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		FE3DCF922AB757AE001E3F06 /* TextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldModifier.swift; sourceTree = "<group>"; };
 		FE3DCF962AB76B2D001E3F06 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -66,6 +64,8 @@
 		FEE9068B2ADF08F5009104D3 /* Jost-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Regular.ttf"; sourceTree = "<group>"; };
 		FEE9068D2ADF08F5009104D3 /* Jost-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Light.ttf"; sourceTree = "<group>"; };
 		FEE9068E2ADF08F5009104D3 /* Jost-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jost-Italic.ttf"; sourceTree = "<group>"; };
+		FEF1323B2AFE402500B15F03 /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
+		FEF1323D2AFE504300B15F03 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +117,7 @@
 				FE3DCF8C2AB7553A001E3F06 /* RegistrationView.swift */,
 				FE3DCF962AB76B2D001E3F06 /* LoginView.swift */,
 				FEC30A052B70E679008BE456 /* EventView.swift */,
+				FEF1323B2AFE402500B15F03 /* CreateEventView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -206,6 +207,7 @@
 				FEB960A52AA907DA00882488 /* Assets.xcassets */,
 				FE9401E02AD3DA8D0019C2DC /* BrandBook */,
 				FEB960A72AA907DA00882488 /* Preview Content */,
+				FEF1323D2AFE504300B15F03 /* EventManager.swift */,
 			);
 			path = AppWithNastenka;
 			sourceTree = "<group>";
@@ -223,8 +225,6 @@
 			children = (
 				FEE9068E2ADF08F5009104D3 /* Jost-Italic.ttf */,
 				FEE906812ADF08F5009104D3 /* Jost-Bold.ttf */,
-				097B21A82B6D04A8001CED48 /* Jost-Black.ttf */,
-				097B21A72B6D04A8001CED48 /* Jost-SemiBold.ttf */,
 				FEE9068B2ADF08F5009104D3 /* Jost-Regular.ttf */,
 				FEE9068D2ADF08F5009104D3 /* Jost-Light.ttf */,
 			);
@@ -301,9 +301,7 @@
 				FEB960A92AA907DA00882488 /* Preview Assets.xcassets in Resources */,
 				FEB960A62AA907DA00882488 /* Assets.xcassets in Resources */,
 				FEE906952ADF0A46009104D3 /* Jost-Regular.ttf in Resources */,
-				097B21AA2B6D04A8001CED48 /* Jost-Black.ttf in Resources */,
 				FEE906962ADF0B29009104D3 /* Jost-Bold.ttf in Resources */,
-				097B21A92B6D04A8001CED48 /* Jost-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +312,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				093086122AAA0C880038A014 /* MainView.swift in Sources */,
+				FEF1323E2AFE504400B15F03 /* EventManager.swift in Sources */,
 				093086122AAA0C880038A014 /* MainView.swift in Sources */,
 				FE9401E42AD3DE5E0019C2DC /* GlobalConstants.swift in Sources */,
 				FEC30A062B70E679008BE456 /* EventView.swift in Sources */,
@@ -331,6 +331,7 @@
 				FEB960A22AA907D800882488 /* App.swift in Sources */,
 				093086222AB041D00038A014 /* AuthController.swift in Sources */,
 				0930861B2AAF4F840038A014 /* StateStore.swift in Sources */,
+				FEF1323C2AFE402500B15F03 /* CreateEventView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

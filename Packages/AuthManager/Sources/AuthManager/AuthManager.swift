@@ -48,7 +48,7 @@ public class AuthManager {
 }
 
 public struct APIConstants {
-    static let baseURL: String = "http://localhost:8080"
+    public static let baseURL: String = "http://127.0.0.1:5000"
     static let resultDescription: String = "message"
     static let email: String = "email"
     static let password: String = "password"

@@ -33,6 +33,7 @@ public func authMiddleware(authManager: AuthManager) -> Middleware<AppState> {
                         case let .success(user):
                             if let user {
                                 dispatch(AuthAction.setUser(.ready(user)))
+                                print(user)
                             }
                         case let .failure(error):
                             // TODO: handle error

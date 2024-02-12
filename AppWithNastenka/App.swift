@@ -16,7 +16,7 @@ struct AppWithNastenkaApp: App {
                 let dispatchGroup = DispatchGroup()
                 dispatchGroup.notify(queue: DispatchQueue.main) {
                     if authController.user.data == nil {
-                        stateStore.dispatch(NavigationAction.push(.reg))
+                        stateStore.dispatch(NavigationAction.push(.register))
                     }
                 }
                 dispatchGroup.enter()
