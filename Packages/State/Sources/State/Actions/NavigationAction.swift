@@ -5,4 +5,6 @@ public enum NavigationAction: Action {
     case pop
     case setRoot(Route)
     case setPath([Route])
+    case setSheet(Route?)
+    case setOverlay(Route?)
 }

@@ -19,6 +19,10 @@ func navigationReducer(action: Action, state: NavigationState?) -> NavigationSta
     case NavigationAction.setPath(let path):
         state.path = path
         state.root = path.first ?? .main
+    case NavigationAction.setSheet(let route):
+        state.sheet = route
+    case NavigationAction.setOverlay(let route):
+        state.overlay = route
     default:
         break
     }

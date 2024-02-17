@@ -16,12 +16,25 @@ struct AppWithNastenkaApp: App {
                 let dispatchGroup = DispatchGroup()
                 dispatchGroup.notify(queue: DispatchQueue.main) {
                     if authController.user.data == nil {
-                        stateStore.dispatch(NavigationAction.push(.register))
+                        stateStore.dispatch(NavigationAction.setOverlay(.register))
                     }
                 }
                 dispatchGroup.enter()
                 navigationController.subscribe()
                 dispatchGroup.leave()
+            }
+            .overlay {
+                if let overlay = navigationController.overlay {
+                    ZStack {
+                        Color(.black)
+                        overlay.view
+                    }
+                }
+            }
+            .sheet(isPresented: $navigationController.isSheetPresented) {
+                if let sheet = navigationController.sheet {
+                    sheet.view
+                }
             }
         }
     }

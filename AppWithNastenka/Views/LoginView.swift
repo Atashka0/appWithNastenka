@@ -11,7 +11,7 @@ struct LoginView: View {
                 HStack {
                     Spacer()
                     Button {
-                        stateStore.dispatch(NavigationAction.setPath([]))
+                        stateStore.dispatch(NavigationAction.setOverlay(nil))
                     } label: {
                         Image(AssetNames.closeCross)
                             .foregroundStyle(.gray)
@@ -56,8 +56,8 @@ struct LoginView: View {
                     Text("Don't have an account?")
                         .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
                     Button {
-                        stateStore.dispatch(NavigationAction.pop)
-                    } label: {
+                        stateStore.dispatch(NavigationAction.setOverlay(.register))
+                        } label: {
                         Text("Sign Up")
                             .font(Font.custom(FontNames.jostSemiBold, size: GlobalConstants.fontSize))
                     }
