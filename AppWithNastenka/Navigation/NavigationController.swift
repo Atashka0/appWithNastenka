@@ -13,6 +13,19 @@ final class NavigationController: ObservableObject {
             }
         }
     }
+    @Published var sheet: Route? = nil
+    @Published var overlay: Route? = nil
+    
+    var isSheetPresented: Bool {
+        get {
+            sheet != nil
+        }
+        set {
+            if !newValue {
+                stateStore.dispatch(NavigationAction.setSheet(nil))
+            }
+        }
+    }
     
     var pathInState: [Route] = []
     
@@ -32,7 +45,9 @@ extension NavigationController {
             subscription.select { state in
                 NavigationState(
                     path: state.navigationState.path,
-                    root: state.navigationState.root
+                    root: state.navigationState.root,
+                    sheet: state.navigationState.sheet,
+                    overlay: state.navigationState.overlay
                 )
             }
             .skipRepeats()
@@ -45,5 +60,7 @@ extension NavigationController: StoreSubscriber {
         pathInState = state.path
         root = state.root
         path = state.path
+        sheet = state.sheet
+        overlay = state.overlay
     }
 }

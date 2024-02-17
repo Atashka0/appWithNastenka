@@ -46,7 +46,8 @@ struct TextArea: View {
 }
 
 
-#Preview {
-    TextArea(placeholder: "Description", text: .constant(""))
+struct TextArea_Previews: PreviewProvider {
+    static var previews: some View {
+        TextArea(placeholder: "Description", text: .constant(""))
+    }
 }
-

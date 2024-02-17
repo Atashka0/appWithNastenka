@@ -16,7 +16,7 @@ struct RegistrationView: View {
                 HStack {
                     Spacer()
                     Button {
-                        stateStore.dispatch(NavigationAction.setPath([]))
+                        stateStore.dispatch(NavigationAction.setOverlay(nil))
                     } label: {
                         Image(AssetNames.closeCross)
                             .foregroundStyle(Color.gray)
@@ -66,7 +66,7 @@ struct RegistrationView: View {
                     Text("Already have an account?")
                         .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
                     Button {
-                        stateStore.dispatch(NavigationAction.push(.login))
+                        stateStore.dispatch(NavigationAction.setOverlay(.login))
                     } label: {
                         Text("Sign In")
                             .font(Font.custom(FontNames.jostSemiBold, size: GlobalConstants.fontSize))
