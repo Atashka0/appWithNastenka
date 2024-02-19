@@ -1,24 +1,6 @@
 import SwiftUI
 import State
 
-enum EventType: Int, CaseIterable {
-    case privatized
-    case open
-    var title: String {
-        switch self {
-        case .privatized: return "Private"
-        case .open: return "Open"
-        }
-    }
-    
-    var description: String {
-        switch self {
-        case .privatized: return "Private events can be seen only by the people you invite."
-        case .open: return "Open events can be seen by all users"
-        }
-    }
-}
-
 struct CreateEventView: View {
     @State private var event: Event = Event()
     
@@ -119,7 +101,9 @@ struct CreateEventView: View {
             VStack {
                 Spacer()
                 Button(action: {
-                    
+                    Task {
+                        await EventManager.newEvent(event: Event(username: "margo", name: event.name, place: event.place, description: event.description, date: event.date, characteristics: event.characteristics, type: event.type))
+                    }
                 }) {
                     Text("Create event")
                         .modifier(ButtonModifier())
