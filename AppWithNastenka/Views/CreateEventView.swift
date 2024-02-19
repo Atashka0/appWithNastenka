@@ -101,7 +101,9 @@ struct CreateEventView: View {
             VStack {
                 Spacer()
                 Button(action: {
-                    
+                    Task {
+                        await EventManager.newEvent(event: Event(username: "margo", name: event.name, place: event.place, description: event.description, date: event.date, characteristics: event.characteristics, type: event.type))
+                    }
                 }) {
                     Text("Create event")
                         .modifier(ButtonModifier())
