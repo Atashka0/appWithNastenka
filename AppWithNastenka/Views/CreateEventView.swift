@@ -1,5 +1,6 @@
 import SwiftUI
 import State
+import ReSwift
 
 struct CreateEventView: View {
     @State private var event: Event = Event()
@@ -59,14 +60,14 @@ struct CreateEventView: View {
                                     .background(Color.black)
                                     .onChange(of: event.characteristics[index].name) { newValue in
                                         if index == event.characteristics.count -  1 && !newValue.isEmpty {
-                                            event.characteristics.append(Characteristic(name: "", description: ""))
+                                            event.characteristics.append(Characteristic())
                                         }
                                     }
                                 TextArea(placeholder: "For example, “90’s party”", text: $event.characteristics[index].description)
                                     .background(Color.black)
                                     .onChange(of: event.characteristics[index].description) { newValue in
                                         if index == event.characteristics.count -  1 && !newValue.isEmpty {
-                                            event.characteristics.append(Characteristic(name: "", description: ""))
+                                            event.characteristics.append(Characteristic())
                                         }
                                     }
                                     .frame(height: 90)
@@ -101,9 +102,7 @@ struct CreateEventView: View {
             VStack {
                 Spacer()
                 Button(action: {
-                    Task {
-                        await EventManager.newEvent(event: Event(username: "margo", name: event.name, place: event.place, description: event.description, date: event.date, characteristics: event.characteristics, type: event.type))
-                    }
+                    stateStore.dispatch(EventAction.createEvent(event))
                 }) {
                     Text("Create event")
                         .modifier(ButtonModifier())

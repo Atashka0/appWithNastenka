@@ -5,6 +5,7 @@ import State
 struct AppWithNastenkaApp: App {
     @StateObject var navigationController = NavigationController()
     @StateObject var authController = AuthController()
+    @StateObject var eventController = EventController()
 
     var body: some Scene {
         WindowGroup {

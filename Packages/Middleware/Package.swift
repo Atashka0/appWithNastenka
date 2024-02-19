@@ -19,7 +19,7 @@ let package = Package(
             url: "https://github.com/ReSwift/ReSwift",
             branch: "master"
         ),
-        .package(path: "../AuthManager"),
+        .package(path: "../APIManager"),
         .package(path: "../State")
     ],
     targets: [
@@ -27,7 +27,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "Middleware",
-            dependencies: [.product(name: "ReSwift", package: "ReSwift"), "AuthManager", "State"]),
+            dependencies: [.product(name: "ReSwift", package: "ReSwift"), "APIManager", "State"]),
         .testTarget(
             name: "MiddlewareTests",
             dependencies: ["Middleware"]),
