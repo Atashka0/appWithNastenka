@@ -10,6 +10,7 @@ struct AppWithNastenkaApp: App {
         WindowGroup {
             NavigationStack(path: $navigationController.path) {
                 navigationController.root.view
+                    .environmentObject(authController)
                     .navigationDestination(for: Route.self, destination: navigationController.view)
             }
             .onAppear {
