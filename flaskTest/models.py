@@ -23,3 +23,27 @@ class User(db.Model):
             "email": self.email,
             "username": self.username
         }
+
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), nullable=False)
+    name = db.Column(db.String(80), nullable=False)
+    place = db.Column(db.String(120), nullable=False)
+    description = db.Column(db.String(120), nullable=False)
+    date = db.Column(db.String(80), nullable=False)
+    type = db.Column(db.String(80), nullable=False)  # EventType as a string
+    characteristics = db.Column(JSON, nullable=False)  # Characteristics as JSON
+    participants = db.relationship('User', backref='event', lazy=True)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "name": self.name,
+            "place": self.place,
+            "description": self.description,
+            "date": self.date,
+            "type": self.type,
+            "characteristics": self.characteristics,
+            "participants": [user.to_dict() for user in self.participants]
+        }

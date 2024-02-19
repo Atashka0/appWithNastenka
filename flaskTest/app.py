@@ -1,7 +1,7 @@
 import os
 import secrets
 from flask import Flask, request, jsonify
-from models import db, User
+from models import db, User, Event, EventType, Characteristic
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
@@ -71,6 +71,34 @@ def delete_user(id):
    db.session.commit()
 
    return jsonify({"message": "User deleted successfully"}), 200
+
+@app.route("/newEvent", methods=["POST"])
+def create_event():
+    data = request.get_json()
+
+    if not data or "username" not in data or "place" not in data or "name" not in data or "description" not in data or "characteristics" not in data or "participants" not in data or "type" not in data:
+        return jsonify({"error": "Invalid data format"}),  400
+
+    # Create an Event instance
+    event = Event(
+        username=data['username'],
+        name=data['name'],
+        place=data['place'],
+        description=data['description'],
+        date=data['date'],
+        type=data['type'],  # Store the string representation of the event type
+        characteristics=data['characteristics'],
+    )
+    db.session.add(event)
+
+    # Assuming 'participants' is a list of User objects
+    # You would need to define a User model and a relationship similar to the one with Characteristic
+    # For now, we will just add the event to the database
+
+    db.session.commit()
+
+    return jsonify({"message": "Event created successfully"}),  201
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8080)

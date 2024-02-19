@@ -55,7 +55,9 @@ struct MainView: View {
                 Image(systemName: MainView.Images.plusCircle)
                     .scaleEffect(MainView.Dimensions.imageScale)
                     .onTapGesture {
-                        stateStore.dispatch(NavigationAction.setSheet(.createEvent))
+                        Task {
+                            await EventManager.newEvent(event: Event(username: "margo", name: "margo", description: "loving loving", date: "April 11, 2024", characteristics: [Characteristic(name: "90's party", description: "blabla")]))
+                        }
                     }
                 Spacer()
                 Image(systemName: MainView.Images.circle)

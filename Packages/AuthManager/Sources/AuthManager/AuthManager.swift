@@ -49,12 +49,12 @@ public class AuthManager {
 
 public struct APIConstants {
     public static let baseURL: String = "http://127.0.0.1:5000"
-    static let resultDescription: String = "message"
+    public static let resultDescription: String = "message"
     static let email: String = "email"
     static let password: String = "password"
     static let username: String = "username"
     
-    enum RESTMethod: String {
+    public enum RESTMethod: String {
         case get = "GET"
         case post = "POST"
         case put = "PUT"

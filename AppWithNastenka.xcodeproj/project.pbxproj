@@ -21,6 +21,7 @@
 		FE3DCF972AB76B2D001E3F06 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DCF962AB76B2D001E3F06 /* LoginView.swift */; };
 		FE8EA71F2B7356FC00162405 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8EA71E2B7356FC00162405 /* Event.swift */; };
 		FE9401E42AD3DE5E0019C2DC /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9401E32AD3DE5E0019C2DC /* GlobalConstants.swift */; };
+		FE96CAEB2B832E3E00D7B2B1 /* toJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE96CAEA2B832E3E00D7B2B1 /* toJSON.swift */; };
 		FEB960A22AA907D800882488 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB960A12AA907D800882488 /* App.swift */; };
 		FEB960A62AA907DA00882488 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEB960A52AA907DA00882488 /* Assets.xcassets */; };
 		FEB960A92AA907DA00882488 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEB960A82AA907DA00882488 /* Preview Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		FE3DCF962AB76B2D001E3F06 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FE8EA71E2B7356FC00162405 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		FE9401E32AD3DE5E0019C2DC /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
+		FE96CAEA2B832E3E00D7B2B1 /* toJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toJSON.swift; sourceTree = "<group>"; };
 		FE96D82C2AD3E74E008B21C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FEB9609E2AA907D800882488 /* AppWithNastenka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppWithNastenka.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEB960A12AA907D800882488 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				FE9401E02AD3DA8D0019C2DC /* BrandBook */,
 				FEB960A72AA907DA00882488 /* Preview Content */,
 				FEF1323D2AFE504300B15F03 /* EventManager.swift */,
+				FE96CAEA2B832E3E00D7B2B1 /* toJSON.swift */,
 			);
 			path = AppWithNastenka;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				FEC781362AE6EE5200EC303B /* ColorScheme.swift in Sources */,
 				FEB960A22AA907D800882488 /* App.swift in Sources */,
 				FE3DCF8D2AB7553A001E3F06 /* RegistrationView.swift in Sources */,
+				FE96CAEB2B832E3E00D7B2B1 /* toJSON.swift in Sources */,
 				FEB960A22AA907D800882488 /* App.swift in Sources */,
 				093086222AB041D00038A014 /* AuthController.swift in Sources */,
 				0930861B2AAF4F840038A014 /* StateStore.swift in Sources */,
