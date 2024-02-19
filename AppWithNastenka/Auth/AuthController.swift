@@ -28,6 +28,9 @@ extension AuthController: StoreSubscriber {
     public func newState(state: AuthState) {
         DispatchQueue.main.async {
             self.user = state.user
+            if self.user.data != nil {
+                stateStore.dispatch(NavigationAction.setOverlay(nil))
+            }
         }
     }
 }

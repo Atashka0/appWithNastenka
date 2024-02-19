@@ -4,8 +4,6 @@ import State
 import Combine
 
 struct RegistrationView: View {
-    @EnvironmentObject var authController: AuthController
-    
     @State var email: String = ""
     @State var username: String = ""
     @State var password: String = ""
@@ -55,9 +53,6 @@ struct RegistrationView: View {
                     .foregroundColor(.red)
                 Button {
                     stateStore.dispatch(AuthAction.registerUser(email, username, password))
-                    if authController.user.data != nil {
-                        stateStore.dispatch(NavigationAction.setOverlay(nil))
-                    }
                 } label: {
                     Text("Sign up")
                         .modifier(ButtonModifier())

@@ -2,7 +2,6 @@ import SwiftUI
 import State
 
 struct LoginView: View {
-    @EnvironmentObject var authController: AuthController
     @State var email: String = ""
     @State var password: String = ""
     
@@ -34,9 +33,6 @@ struct LoginView: View {
                 
                 Button {
                     stateStore.dispatch(AuthAction.fetchUser(email, password))
-                    if authController.user.data != nil {
-                        stateStore.dispatch(NavigationAction.setOverlay(nil))
-                    }
                 } label: {
                     Text("Login")
                         .modifier(ButtonModifier())
