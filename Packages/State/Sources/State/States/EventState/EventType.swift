@@ -1,4 +1,4 @@
-public enum EventType: Int, Codable, CaseIterable, Hashable {
+public enum EventType: String, Codable, CaseIterable, Hashable {
     
     // MARK: - Cases
     

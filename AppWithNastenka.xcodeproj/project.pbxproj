@@ -322,7 +322,6 @@
 				FEC781362AE6EE5200EC303B /* ColorScheme.swift in Sources */,
 				FEB960A22AA907D800882488 /* App.swift in Sources */,
 				FE3DCF8D2AB7553A001E3F06 /* RegistrationView.swift in Sources */,
-				FE96CAEB2B832E3E00D7B2B1 /* (null) in Sources */,
 				FEB960A22AA907D800882488 /* App.swift in Sources */,
 				093086222AB041D00038A014 /* AuthController.swift in Sources */,
 				0930861B2AAF4F840038A014 /* StateStore.swift in Sources */,

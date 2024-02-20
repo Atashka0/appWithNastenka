@@ -104,13 +104,14 @@ def create_event():
     db.session.add(new_event)
     db.session.commit()
 
-    return jsonify({"message": "Event created successfully"}),  201
+    return jsonify(new_event.to_dict()),  201
 
 @app.route("/getEvents", methods=["GET"])
 def get_events():
     events = Event.query.all()
     events_list = [event.to_dict() for event in events]
     return jsonify(events_list),  200
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8080)
