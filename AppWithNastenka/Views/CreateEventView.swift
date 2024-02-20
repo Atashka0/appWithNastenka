@@ -36,9 +36,9 @@ struct CreateEventView: View {
                         .frame(maxWidth: .infinity)
                         .frame(alignment: .center)
                     
-                    TextField("New event title", text: $event.place)
+                    TextField("New event title", text: $event.name)
                         .modifier(TextFieldModifier(strokeColor: ColorScheme.darkGray))
-                    TextField("Place, date and time", text: $event.name)
+                    TextField("Place, date and time", text: $event.place)
                         .modifier(TextFieldModifier(strokeColor: ColorScheme.darkGray))
                     TextArea(placeholder: "Description", text: $event.description)
                         .frame(height:200)
