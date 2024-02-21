@@ -98,12 +98,12 @@ public func eventMiddleware(eventManager: EventManager) -> Middleware<AppState> 
                             print(error)
                         }
                     }
-                case let .editEvent(event):
+                case let .changeEvent(event):
                     Task {
-                        let result = await eventManager.editEvent(event)
+                        let result = await eventManager.changeEvent(event)
                         switch result {
                         case let .success(editedEvent):
-                            dispatch(SetEventStateAction.changeEvent(editedEvent))
+                            dispatch(SetEventStateAction.setChangedEvent(editedEvent))
                         case let .failure(error):
                             print(error)
                         }

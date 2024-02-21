@@ -5,7 +5,7 @@ public enum SetEventStateAction: Action {
     case setLoggedUserEvents([Event])
     case addLoggedUserEvent(Event)
     /// Приходит обновленный ивент со старым айди
-    case changeEvent(Event)
+    case setChangedEvent(Event)
     case removeLoggedUserEvent(Event)
     case setFeedEvents([Event])
     case setUserEvents(User, [Event])

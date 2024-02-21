@@ -39,7 +39,7 @@ public class EventManager {
         return Result.success([Event()])
     }
     
-    public func editEvent(_ event: Event) async -> Result<Event, Error>{
+    public func changeEvent(_ event: Event) async -> Result<Event, Error>{
         return Result.success(Event())
     }
     

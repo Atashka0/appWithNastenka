@@ -21,7 +21,7 @@ public struct Event: Codable, Hashable {
         place: String = "",
         description: String = "",
         date: String = "",
-        characteristics: [Characteristic] = [Characteristic()],
+        characteristics: [Characteristic] = [],
         participants: [User] = [],
         type: EventType = .privatized
     ) {

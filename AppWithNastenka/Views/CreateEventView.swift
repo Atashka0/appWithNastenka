@@ -3,7 +3,7 @@ import State
 import ReSwift
 
 struct CreateEventView: View {
-    @State private var event: Event = Event()
+    @State private var event: Event = Event(characteristics: [Characteristic()])
     
     var body: some View {
         ZStack {
@@ -102,7 +102,9 @@ struct CreateEventView: View {
             VStack {
                 Spacer()
                 Button(action: {
+                    event.characteristics.removeLast()
                     stateStore.dispatch(EventAction.createEvent(event))
+                    stateStore.dispatch(NavigationAction.setSheet(nil))
                 }) {
                     Text("Create event")
                         .modifier(ButtonModifier())

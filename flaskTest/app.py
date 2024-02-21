@@ -27,10 +27,10 @@ def register():
     password = data["password"]
 
     if User.query.filter_by(email=email).first():
-        return jsonify({"error": "User already exists"}), 400
+        return jsonify({"error": f"user with email address {email} already exists"}), 400
 
     if User.query.filter_by(username=username).first():
-        return jsonify({"error": "Username already exists"}), 400
+        return jsonify({"error": f"username {username} is already taken."}), 400
 
     user = User(email=email, username=username, password=password)
     db.session.add(user)
@@ -113,7 +113,6 @@ def get_events():
     events = Event.query.all()
     events_list = [event.to_dict() for event in events]
     return jsonify(events_list),  200
-
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8080)

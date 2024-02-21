@@ -17,6 +17,8 @@ func eventReducer(action: Action, state: EventState?) -> EventState {
         state.feedEvents = events
     case let SetEventStateAction.setUserEvents(user, events):
         state.usersEvents[user] = events
+    case let SetEventStateAction.setChangedEvent(newEvent):
+        state.loggedUserEvents = state.loggedUserEvents.map { $0.id == newEvent.id ? newEvent : $0 }
     default:
         break
     }
