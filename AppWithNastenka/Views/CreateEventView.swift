@@ -1,8 +1,9 @@
 import SwiftUI
 import State
+import ReSwift
 
 struct CreateEventView: View {
-    @State private var event: Event = Event()
+    @State private var event: Event = Event(characteristics: [Characteristic()])
     
     var body: some View {
         ZStack {
@@ -35,9 +36,9 @@ struct CreateEventView: View {
                         .frame(maxWidth: .infinity)
                         .frame(alignment: .center)
                     
-                    TextField("New event title", text: $event.place)
+                    TextField("New event title", text: $event.name)
                         .modifier(TextFieldModifier(strokeColor: ColorScheme.darkGray))
-                    TextField("Place, date and time", text: $event.name)
+                    TextField("Place, date and time", text: $event.place)
                         .modifier(TextFieldModifier(strokeColor: ColorScheme.darkGray))
                     TextArea(placeholder: "Description", text: $event.description)
                         .frame(height:200)
@@ -59,14 +60,14 @@ struct CreateEventView: View {
                                     .background(Color.black)
                                     .onChange(of: event.characteristics[index].name) { newValue in
                                         if index == event.characteristics.count -  1 && !newValue.isEmpty {
-                                            event.characteristics.append(Characteristic(name: "", description: ""))
+                                            event.characteristics.append(Characteristic())
                                         }
                                     }
                                 TextArea(placeholder: "For example, “90’s party”", text: $event.characteristics[index].description)
                                     .background(Color.black)
                                     .onChange(of: event.characteristics[index].description) { newValue in
                                         if index == event.characteristics.count -  1 && !newValue.isEmpty {
-                                            event.characteristics.append(Characteristic(name: "", description: ""))
+                                            event.characteristics.append(Characteristic())
                                         }
                                     }
                                     .frame(height: 90)
@@ -101,9 +102,9 @@ struct CreateEventView: View {
             VStack {
                 Spacer()
                 Button(action: {
-                    Task {
-                        await EventManager.newEvent(event: Event(username: "margo", name: event.name, place: event.place, description: event.description, date: event.date, characteristics: event.characteristics, type: event.type))
-                    }
+                    event.characteristics.removeLast()
+                    stateStore.dispatch(EventAction.createEvent(event))
+                    stateStore.dispatch(NavigationAction.setSheet(nil))
                 }) {
                     Text("Create event")
                         .modifier(ButtonModifier())

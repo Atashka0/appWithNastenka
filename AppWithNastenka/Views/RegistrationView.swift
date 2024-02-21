@@ -52,7 +52,7 @@ struct RegistrationView: View {
                     .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
                     .foregroundColor(.red)
                 Button {
-                    stateStore.dispatch(AuthAction.registerUser(email, username, password))
+                    stateStore.dispatch(AuthAction.registerUser(User(username: username.lowercased(), email: email.lowercased()), password))
                 } label: {
                     Text("Sign up")
                         .modifier(ButtonModifier())

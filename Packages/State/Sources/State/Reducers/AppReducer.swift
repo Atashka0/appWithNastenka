@@ -5,6 +5,7 @@ import ReSwift
 public func appReducer(action: Action, state: AppState?) -> AppState {
     AppState(
         navigationState: navigationReducer(action: action, state: state?.navigationState),
-        authState: authReducer(action: action, state: state?.authState)
+        authState: authReducer(action: action, state: state?.authState),
+        eventState: eventReducer(action: action, state: state?.eventState)
     )
 }

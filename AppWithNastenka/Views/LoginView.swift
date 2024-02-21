@@ -32,7 +32,7 @@ struct LoginView: View {
                     .modifier(TextFieldModifier())
                 
                 Button {
-                    stateStore.dispatch(AuthAction.fetchUser(email, password))
+                    stateStore.dispatch(AuthAction.fetchUser(email.lowercased(), password))
                 } label: {
                     Text("Login")
                         .modifier(ButtonModifier())
