@@ -2,6 +2,7 @@ public struct Event: Codable, Hashable {
     
     // MARK: - Properties
     
+    public var id: Int
     public var username: String
     public var name: String
     public var place: String
@@ -14,6 +15,7 @@ public struct Event: Codable, Hashable {
     // MARK: - Lifecycle
     
     public init(
+        id: Int = 0,
         username: String = "",
         name: String = "",
         place: String = "",
@@ -23,6 +25,7 @@ public struct Event: Codable, Hashable {
         participants: [User] = [],
         type: EventType = .privatized
     ) {
+        self.id = id
         self.username = username
         self.name = name
         self.place = place

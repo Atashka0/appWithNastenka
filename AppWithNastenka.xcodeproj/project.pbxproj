@@ -20,7 +20,6 @@
 		FE3DCF932AB757AE001E3F06 /* TextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DCF922AB757AE001E3F06 /* TextFieldModifier.swift */; };
 		FE3DCF972AB76B2D001E3F06 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DCF962AB76B2D001E3F06 /* LoginView.swift */; };
 		FE9401E42AD3DE5E0019C2DC /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9401E32AD3DE5E0019C2DC /* GlobalConstants.swift */; };
-		FE96CAEB2B832E3E00D7B2B1 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		FEB960A22AA907D800882488 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB960A12AA907D800882488 /* App.swift */; };
 		FEB960A62AA907DA00882488 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEB960A52AA907DA00882488 /* Assets.xcassets */; };
 		FEB960A92AA907DA00882488 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEB960A82AA907DA00882488 /* Preview Assets.xcassets */; };

@@ -12,10 +12,10 @@ public class EventManager {
             print(jsonString)
         }
         
-        var request = URLRequest(url: URL(string: "\(APIConstants.baseURL)/newEvent")!)
+        var request = URLRequest(url: URL(string: APIConstants.baseURL + APIConstants.Handles.newEvent.rawValue)!)
         request.httpMethod = APIConstants.RESTMethod.post.rawValue
         request.httpBody = data
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(APIConstants.HeaderValues.json.rawValue, forHTTPHeaderField: APIConstants.HeaderFields.contentType.rawValue)
         
         do {
             let (data, _) = try await URLSession.shared.data(for: request)
@@ -31,12 +31,16 @@ public class EventManager {
         }
     }
 
-    public func getEventsFor(user: User) async -> Result<[Event], Error> {
+    public func getEvents(for user: User) async -> Result<[Event], Error> {
         return Result.success([Event()])
     }
 
-    public func getFeedEventsFor(user: User) async -> Result<[Event], Error>{
+    public func getFeedEvents(for user: User) async -> Result<[Event], Error>{
         return Result.success([Event()])
+    }
+    
+    public func editEvent(_ event: Event) async -> Result<Event, Error>{
+        return Result.success(Event())
     }
     
     public func removeUserEvent(user: User, event: Event) async -> Result<Event, Error>{

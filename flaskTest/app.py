@@ -21,13 +21,16 @@ def register():
 
     if not data or "email" not in data or "password" not in data:
         return jsonify({"error": "Invalid data format"}), 400
-    
+
     email = data["email"]
     username = data["username"]
     password = data["password"]
 
     if User.query.filter_by(email=email).first():
         return jsonify({"error": "User already exists"}), 400
+
+    if User.query.filter_by(username=username).first():
+        return jsonify({"error": "Username already exists"}), 400
 
     user = User(email=email, username=username, password=password)
     db.session.add(user)
@@ -84,7 +87,6 @@ def create_event():
         name=data['name'],
         place=data['place'],
         description=data['description'],
-        # 0 for privatized, 1 for open
         type = data['type'],
         date=data.get('date', '')
     )
@@ -106,7 +108,7 @@ def create_event():
 
     return jsonify(new_event.to_dict()),  201
 
-@app.route("/getEvents", methods=["GET"])
+@app.route("/events", methods=["GET"])
 def get_events():
     events = Event.query.all()
     events_list = [event.to_dict() for event in events]

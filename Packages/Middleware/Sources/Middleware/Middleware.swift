@@ -25,10 +25,10 @@ public func authMiddleware(authManager: AuthManager) -> Middleware<AppState> {
                             print(error)
                         }
                     }
-                case let .registerUser(email, username, password):
+                case let .registerUser(user, password):
                     dispatch(AuthAction.setUser(.loading))
                     Task {
-                        let result = await authManager.registerUser(email: email, username: username, password: password)
+                        let result = await authManager.registerUser(user, password: password)
                         switch result {
                         case let .success(user):
                             if let user {
@@ -40,19 +40,6 @@ public func authMiddleware(authManager: AuthManager) -> Middleware<AppState> {
                             print(error)
                         }
                     }
-                case .logOut:
-                    dispatch(AuthAction.setUser(.initial))
-                    Task {
-                        let result = await authManager.logOut()
-                        switch result {
-                        case .success(_):
-                            dispatch(AuthAction.setUser(.initial))
-                        case let .failure(error):
-                            // TODO: handle error
-                            print("Could not logout: ", error)
-                        }
-                    }
-                    
                 default: break
                 }
                 next(action)
@@ -83,7 +70,7 @@ public func eventMiddleware(eventManager: EventManager) -> Middleware<AppState> 
                     }
                 case let .getFeedEvents(user):
                     Task {
-                        let result = await eventManager.getFeedEventsFor(user: user)
+                        let result = await eventManager.getFeedEvents(for: user)
                         switch result {
                         case let .success(events):
                             dispatch(SetEventStateAction.setFeedEvents(events))
@@ -93,7 +80,7 @@ public func eventMiddleware(eventManager: EventManager) -> Middleware<AppState> 
                     }
                 case let .getUserEvents(user):
                     Task {
-                        let result = await eventManager.getEventsFor(user: user)
+                        let result = await eventManager.getEvents(for: user)
                         switch result {
                         case let .success(events):
                             dispatch(SetEventStateAction.setUserEvents(user, events))
@@ -107,6 +94,16 @@ public func eventMiddleware(eventManager: EventManager) -> Middleware<AppState> 
                         switch result {
                         case let .success(event):
                             dispatch(SetEventStateAction.removeLoggedUserEvent(event))
+                        case let .failure(error):
+                            print(error)
+                        }
+                    }
+                case let .editEvent(event):
+                    Task {
+                        let result = await eventManager.editEvent(event)
+                        switch result {
+                        case let .success(editedEvent):
+                            dispatch(SetEventStateAction.changeEvent(editedEvent))
                         case let .failure(error):
                             print(error)
                         }
