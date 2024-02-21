@@ -15,7 +15,9 @@
 		0930861B2AAF4F840038A014 /* StateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0930861A2AAF4F840038A014 /* StateStore.swift */; };
 		0930861F2AAF50380038A014 /* Middleware in Frameworks */ = {isa = PBXBuildFile; productRef = 0930861E2AAF50380038A014 /* Middleware */; };
 		093086222AB041D00038A014 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093086212AB041D00038A014 /* AuthController.swift */; };
+		09776CAF2B8631D800DD0416 /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 09776CAE2B8631D800DD0416 /* Common */; };
 		09D802202B837B440009EA31 /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D8021F2B837B440009EA31 /* EventController.swift */; };
+		09D802262B8618850009EA31 /* APIManager in Frameworks */ = {isa = PBXBuildFile; productRef = 09D802252B8618850009EA31 /* APIManager */; };
 		FE3DCF8D2AB7553A001E3F06 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DCF8C2AB7553A001E3F06 /* RegistrationView.swift */; };
 		FE3DCF932AB757AE001E3F06 /* TextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DCF922AB757AE001E3F06 /* TextFieldModifier.swift */; };
 		FE3DCF972AB76B2D001E3F06 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3DCF962AB76B2D001E3F06 /* LoginView.swift */; };
@@ -70,9 +72,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09776CAF2B8631D800DD0416 /* Common in Frameworks */,
 				0930861F2AAF50380038A014 /* Middleware in Frameworks */,
 				0930860B2AA9EF660038A014 /* State in Frameworks */,
 				093086082AA9EEB10038A014 /* ReSwift in Frameworks */,
+				09D802262B8618850009EA31 /* APIManager in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +250,8 @@
 				093086072AA9EEB10038A014 /* ReSwift */,
 				0930860A2AA9EF660038A014 /* State */,
 				0930861E2AAF50380038A014 /* Middleware */,
+				09D802252B8618850009EA31 /* APIManager */,
+				09776CAE2B8631D800DD0416 /* Common */,
 			);
 			productName = AppWithNastenka;
 			productReference = FEB9609E2AA907D800882488 /* AppWithNastenka.app */;
@@ -554,6 +560,14 @@
 		0930861E2AAF50380038A014 /* Middleware */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Middleware;
+		};
+		09776CAE2B8631D800DD0416 /* Common */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Common;
+		};
+		09D802252B8618850009EA31 /* APIManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = APIManager;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

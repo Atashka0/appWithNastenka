@@ -5,6 +5,9 @@ import SwiftUI
 
 /// Получает обновление стейта и публикует обновленные переменные.
 final class NavigationController: ObservableObject {
+    var authController: AuthController?
+    var eventController: EventController?
+    
     @Published var root: Route = .main
     @Published var path: [Route] = [] {
         willSet {
@@ -31,7 +34,11 @@ final class NavigationController: ObservableObject {
     
     @ViewBuilder
     func view(for route: Route) -> some View {
-        route.view.navigationBarBackButtonHidden()
+        route.view(
+            authController: authController ?? AuthController(),
+            eventController: eventController ?? EventController()
+        )
+        .navigationBarBackButtonHidden()
     }
     
     deinit {
@@ -40,7 +47,9 @@ final class NavigationController: ObservableObject {
 }
 
 extension NavigationController {
-    func subscribe() {
+    func subscribe(authController: AuthController, eventController: EventController) {
+        self.authController = authController
+        self.eventController = eventController
         stateStore.subscribe(self) { subscription in
             subscription.select { state in
                 NavigationState(

@@ -2,6 +2,8 @@ import SwiftUI
 import State
 
 struct LoginView: View {
+    @ObservedObject var authController: AuthController
+    
     @State var email: String = ""
     @State var password: String = ""
     
@@ -75,7 +77,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(authController: AuthController())
     }
 }
 

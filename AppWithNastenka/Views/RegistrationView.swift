@@ -4,6 +4,8 @@ import State
 import Combine
 
 struct RegistrationView: View {
+    @ObservedObject var authController: AuthController
+    
     @State var email: String = ""
     @State var username: String = ""
     @State var password: String = ""
@@ -84,7 +86,7 @@ struct RegistrationView: View {
 
 struct RegistrationView_Previews: PreviewProvider {
     static var previews: some View {
-        RegistrationView()
+        RegistrationView(authController: AuthController())
     }
 }
 

@@ -3,6 +3,8 @@ import State
 import ReSwift
 
 struct CreateEventView: View {
+    @ObservedObject var eventController: EventController
+    
     @State private var event: Event = Event(characteristics: [Characteristic()])
     
     var body: some View {
@@ -118,6 +120,6 @@ struct CreateEventView: View {
 
 struct CreateEventView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateEventView()
+        CreateEventView(eventController: EventController())
     }
 }
