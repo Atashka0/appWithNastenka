@@ -4,7 +4,13 @@ import State
 import Combine
 
 struct RegistrationView: View {
-    @ObservedObject var authController: AuthController
+    @ObservedObject var authController: AuthController {
+        didSet {
+            if authController.user.data != nil {
+                stateStore.dispatch(NavigationAction.setOverlay(nil))
+            }
+        }
+    }
     
     @State var email: String = ""
     @State var username: String = ""
@@ -50,9 +56,22 @@ struct RegistrationView: View {
                         passwordMismatch = password != passwordVerification
                     }
                 }
-                Text(passwordMismatch ? "Passwords do not match" : "")
-                    .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
-                    .foregroundColor(.red)
+                if passwordMismatch {
+                    Text("Passwords do not match")
+                        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
+                        .foregroundColor(.red)
+                }
+                if let error = authController.error {
+                    if case let WithMeError.userInitiatedError(message) = error {
+                        Text(message)
+                            .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
+                            .foregroundColor(.red)
+                    } else {
+                        Text("Oops! something went wrong...")
+                            .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
+                            .foregroundColor(.red)
+                    }
+                }
                 Button {
                     stateStore.dispatch(AuthAction.registerUser(User(username: username.lowercased(), email: email.lowercased()), password))
                 } label: {
@@ -80,6 +99,11 @@ struct RegistrationView: View {
                 .padding(.top, geometry.size.height * RegLogConstants.bottomViewTopPadding)
             }
             .padding(.horizontal)
+        }
+        .onDisappear {
+            if authController.error != nil {
+                stateStore.dispatch(AuthAction.setError(nil))
+            }
         }
     }
 }

@@ -19,6 +19,8 @@ func eventReducer(action: Action, state: EventState?) -> EventState {
         state.usersEvents[user] = events
     case let SetEventStateAction.setChangedEvent(newEvent):
         state.loggedUserEvents = state.loggedUserEvents.map { $0.id == newEvent.id ? newEvent : $0 }
+    case let SetEventStateAction.setError(error):
+        state.error = error
     default:
         break
     }

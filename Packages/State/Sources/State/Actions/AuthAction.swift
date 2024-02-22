@@ -6,4 +6,5 @@ public enum AuthAction: Action {
     case registerUser(User, String)
     case setUser(Loadable<User>)
     case logOut
+    case setError(WithMeError?)
 }

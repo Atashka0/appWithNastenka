@@ -18,9 +18,14 @@ public class EventManager {
         request.setValue(APIConstants.HeaderValues.json.rawValue, forHTTPHeaderField: APIConstants.HeaderFields.contentType.rawValue)
         
         do {
-            let (data, _) = try await URLSession.shared.data(for: request)
+            let (data, response) = try await URLSession.shared.data(for: request)
             let decoder = JSONDecoder()
             print(data)
+            
+            if let error = handleError(response: response, data: data) {
+                return Result.failure(error)
+            }
+            
             if let event = try? decoder.decode(Event.self, from: data) {
                 return Result.success(event)
             } else {

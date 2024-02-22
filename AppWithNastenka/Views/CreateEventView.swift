@@ -3,9 +3,19 @@ import State
 import ReSwift
 
 struct CreateEventView: View {
-    @ObservedObject var eventController: EventController
+    @ObservedObject var eventController: EventController {
+        didSet {
+            if var last = eventController.loggedUserEvents.last {
+                last.id = 0
+                if last == event {
+                    stateStore.dispatch(NavigationAction.setSheet(nil))
+                }
+            }
+        }
+    }
     
     @State private var event: Event = Event(characteristics: [Characteristic()])
+    @State private var error: String = ""
     
     var body: some View {
         ZStack {
@@ -37,6 +47,32 @@ struct CreateEventView: View {
                         .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.smallFontSize))
                         .frame(maxWidth: .infinity)
                         .frame(alignment: .center)
+                    
+                    VStack {
+                        if !error.isEmpty {
+                            Text(error)
+                                .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
+                                .foregroundColor(.red)
+                                .frame(maxWidth: .infinity)
+                                .frame(alignment: .center)
+                        }
+                        
+                        if let error = eventController.error {
+                            if case let WithMeError.userInitiatedError(message) = error {
+                                Text(message)
+                                    .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
+                                    .foregroundColor(.red)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(alignment: .center)
+                            } else {
+                                Text("Oops! something went wrong...")
+                                    .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
+                                    .foregroundColor(.red)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(alignment: .center)
+                            }
+                        }
+                    }
                     
                     TextField("New event title", text: $event.name)
                         .modifier(TextFieldModifier(strokeColor: ColorScheme.darkGray))
@@ -104,9 +140,17 @@ struct CreateEventView: View {
             VStack {
                 Spacer()
                 Button(action: {
-                    event.characteristics.removeLast()
-                    stateStore.dispatch(EventAction.createEvent(event))
-                    stateStore.dispatch(NavigationAction.setSheet(nil))
+                    if eventController.error != nil {
+                        stateStore.dispatch(SetEventStateAction.setError(nil))
+                    }
+                    if event.name.isEmpty {
+                        error = "Please enter event title"
+                    } else  {
+                        error = ""
+                        var eventToSend = event
+                        _ = eventToSend.characteristics.popLast()
+                        stateStore.dispatch(EventAction.createEvent(eventToSend))
+                    }
                 }) {
                     Text("Create event")
                         .modifier(ButtonModifier())

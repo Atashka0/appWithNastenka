@@ -21,8 +21,10 @@ public func authMiddleware(authManager: AuthManager) -> Middleware<AppState> {
                                 dispatch(AuthAction.setUser(.ready(user)))
                             }
                         case let .failure(error):
-                            // TODO: handle error
                             print(error)
+                            if let error = error as? WithMeError {
+                                dispatch(AuthAction.setError(error))
+                            }
                         }
                     }
                 case let .registerUser(user, password):
@@ -36,8 +38,10 @@ public func authMiddleware(authManager: AuthManager) -> Middleware<AppState> {
                                 print(user)
                             }
                         case let .failure(error):
-                            // TODO: handle error
                             print(error)
+                            if let error = error as? WithMeError {
+                                dispatch(AuthAction.setError(error))
+                            }
                         }
                     }
                 default: break
@@ -64,8 +68,10 @@ public func eventMiddleware(eventManager: EventManager) -> Middleware<AppState> 
                         case let .success(event):
                             dispatch(SetEventStateAction.addLoggedUserEvent(event))
                         case let .failure(error):
-                            // TODO: handle error
                             print(error)
+                            if let error = error as? WithMeError {
+                                dispatch(SetEventStateAction.setError(error))
+                            }
                         }
                     }
                 case let .getFeedEvents(user):
@@ -76,6 +82,9 @@ public func eventMiddleware(eventManager: EventManager) -> Middleware<AppState> 
                             dispatch(SetEventStateAction.setFeedEvents(events))
                         case let .failure(error):
                             print(error)
+                            if let error = error as? WithMeError {
+                                dispatch(SetEventStateAction.setError(error))
+                            }
                         }
                     }
                 case let .getUserEvents(user):
@@ -86,6 +95,9 @@ public func eventMiddleware(eventManager: EventManager) -> Middleware<AppState> 
                             dispatch(SetEventStateAction.setUserEvents(user, events))
                         case let .failure(error):
                             print(error)
+                            if let error = error as? WithMeError {
+                                dispatch(SetEventStateAction.setError(error))
+                            }
                         }
                     }
                 case let .removeUserEvent(user, event):
@@ -96,6 +108,9 @@ public func eventMiddleware(eventManager: EventManager) -> Middleware<AppState> 
                             dispatch(SetEventStateAction.removeLoggedUserEvent(event))
                         case let .failure(error):
                             print(error)
+                            if let error = error as? WithMeError {
+                                dispatch(SetEventStateAction.setError(error))
+                            }
                         }
                     }
                 case let .changeEvent(event):
@@ -106,6 +121,9 @@ public func eventMiddleware(eventManager: EventManager) -> Middleware<AppState> 
                             dispatch(SetEventStateAction.setChangedEvent(editedEvent))
                         case let .failure(error):
                             print(error)
+                            if let error = error as? WithMeError {
+                                dispatch(SetEventStateAction.setError(error))
+                            }
                         }
                     }
                 }

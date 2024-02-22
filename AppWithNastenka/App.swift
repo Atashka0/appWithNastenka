@@ -10,9 +10,7 @@ struct AppWithNastenkaApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $navigationController.path) {
-                ZStack {
                     navigationController.root.view(authController: authController, eventController: eventController)
-                }
                 .navigationDestination(for: Route.self, destination: navigationController.view)
             }
             .onAppear {

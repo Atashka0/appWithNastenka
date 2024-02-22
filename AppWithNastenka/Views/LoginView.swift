@@ -2,7 +2,13 @@ import SwiftUI
 import State
 
 struct LoginView: View {
-    @ObservedObject var authController: AuthController
+    @ObservedObject var authController: AuthController {
+        didSet {
+            if authController.user.data != nil {
+                stateStore.dispatch(NavigationAction.setOverlay(nil))
+            }
+        }
+    }
     
     @State var email: String = ""
     @State var password: String = ""
@@ -32,6 +38,18 @@ struct LoginView: View {
                     .modifier(TextFieldModifier())
                 CustomSecureField(placeholder: "Password", rightView: AssetNames.eye, text: $password)
                     .modifier(TextFieldModifier())
+                
+                if let error = authController.error {
+                    if case let WithMeError.userInitiatedError(message) = error {
+                        Text(message)
+                            .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
+                            .foregroundColor(.red)
+                    } else {
+                        Text("Oops! something went wrong...")
+                            .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
+                            .foregroundColor(.red)
+                    }
+                }
                 
                 Button {
                     stateStore.dispatch(AuthAction.fetchUser(email.lowercased(), password))
@@ -71,6 +89,11 @@ struct LoginView: View {
             }
             .navigationBarBackButtonHidden(true)
             .padding(.horizontal)
+        }
+        .onDisappear {
+            if authController.error != nil {
+                stateStore.dispatch(AuthAction.setError(nil))
+            }
         }
     }
 }
