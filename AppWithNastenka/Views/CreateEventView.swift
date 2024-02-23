@@ -15,7 +15,7 @@ struct CreateEventView: View {
     }
     
     @State private var event: Event = Event(characteristics: [Characteristic()])
-    @State private var error: String = ""
+    @State private var isTitleEmptyError = false
     private static let errorViewId = "errorViewId"
     
     var body: some View {
@@ -24,14 +24,6 @@ struct CreateEventView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading) {
                         VStack {
-                            if !error.isEmpty {
-                                Text(error)
-                                    .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
-                                    .foregroundColor(.red)
-                                    .frame(maxWidth: .infinity)
-                                    .frame(alignment: .center)
-                            }
-                            
                             if let error = eventController.error {
                                 if case let WithMeError.userInitiatedError(message) = error {
                                     Text(message)
@@ -77,8 +69,8 @@ struct CreateEventView: View {
                             .frame(maxWidth: .infinity)
                             .frame(alignment: .center)
                         
-                        TextField("New event title", text: $event.name)
-                            .modifier(TextFieldModifier(strokeColor: ColorScheme.darkGray))
+                            TextField("New event title", text: $event.name)
+                            .modifier(TextFieldModifier(strokeColor: isTitleEmptyError ? .red : ColorScheme.darkGray))
                         TextField("Place, date and time", text: $event.place)
                             .modifier(TextFieldModifier(strokeColor: ColorScheme.darkGray))
                         TextArea(placeholder: "Description", text: $event.description)
@@ -145,7 +137,7 @@ struct CreateEventView: View {
                         reader.scrollTo(Self.errorViewId, anchor: .top)
                     }
                 }
-                .onChange(of: error) { _ in
+                .onChange(of: isTitleEmptyError) { _ in
                     withAnimation {
                         reader.scrollTo(Self.errorViewId, anchor: .top)
                     }
@@ -158,9 +150,9 @@ struct CreateEventView: View {
                         stateStore.dispatch(SetEventStateAction.setError(nil))
                     }
                     if event.name.isEmpty {
-                        error = "Please enter event title"
+                        isTitleEmptyError = true
                     } else  {
-                        error = ""
+                        isTitleEmptyError = false
                         var eventToSend = event
                         _ = eventToSend.characteristics.popLast()
                         stateStore.dispatch(EventAction.createEvent(eventToSend))

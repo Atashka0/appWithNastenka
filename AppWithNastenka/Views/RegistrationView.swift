@@ -4,13 +4,7 @@ import State
 import Combine
 
 struct RegistrationView: View {
-    @ObservedObject var authController: AuthController {
-        didSet {
-            if authController.user.data != nil {
-                stateStore.dispatch(NavigationAction.setOverlay(nil))
-            }
-        }
-    }
+    @ObservedObject var authController: AuthController
     
     @State var email: String = ""
     @State var username: String = ""
@@ -61,7 +55,7 @@ struct RegistrationView: View {
                         .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
                         .foregroundColor(.red)
                 }
-                if let error = authController.error {
+                else if let error = authController.error {
                     if case let WithMeError.userInitiatedError(message) = error {
                         Text(message)
                             .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
@@ -99,6 +93,11 @@ struct RegistrationView: View {
                 .padding(.top, geometry.size.height * RegLogConstants.bottomViewTopPadding)
             }
             .padding(.horizontal)
+        }
+        .onChange(of: authController.user.data) { userData in
+            if userData != nil {
+                stateStore.dispatch(NavigationAction.setOverlay(nil))
+            }
         }
         .onDisappear {
             if authController.error != nil {

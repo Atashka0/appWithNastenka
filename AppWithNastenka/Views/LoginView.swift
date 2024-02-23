@@ -2,13 +2,7 @@ import SwiftUI
 import State
 
 struct LoginView: View {
-    @ObservedObject var authController: AuthController {
-        didSet {
-            if authController.user.data != nil {
-                stateStore.dispatch(NavigationAction.setOverlay(nil))
-            }
-        }
-    }
+    @ObservedObject var authController: AuthController
     
     @State var email: String = ""
     @State var password: String = ""
@@ -89,6 +83,11 @@ struct LoginView: View {
             }
             .navigationBarBackButtonHidden(true)
             .padding(.horizontal)
+        }
+        .onChange(of: authController.user.data) { userData in
+            if userData != nil {
+                stateStore.dispatch(NavigationAction.setOverlay(nil))
+            }
         }
         .onDisappear {
             if authController.error != nil {
