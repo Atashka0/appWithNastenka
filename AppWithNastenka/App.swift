@@ -10,8 +10,8 @@ struct AppWithNastenkaApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $navigationController.path) {
-                navigationController.root.view
-                    .navigationDestination(for: Route.self, destination: navigationController.view)
+                    navigationController.root.view(authController: authController, eventController: eventController)
+                .navigationDestination(for: Route.self, destination: navigationController.view)
             }
             .onAppear {
                 let dispatchGroup = DispatchGroup()
@@ -21,20 +21,20 @@ struct AppWithNastenkaApp: App {
                     }
                 }
                 dispatchGroup.enter()
-                navigationController.subscribe()
+                navigationController.subscribe(authController: authController, eventController: eventController)
                 dispatchGroup.leave()
             }
             .overlay {
                 if let overlay = navigationController.overlay {
                     ZStack {
                         Color(.black)
-                        overlay.view
+                        overlay.view(authController: authController, eventController: eventController)
                     }
                 }
             }
             .sheet(isPresented: $navigationController.isSheetPresented) {
                 if let sheet = navigationController.sheet {
-                    sheet.view
+                    sheet.view(authController: authController, eventController: eventController)
                 }
             }
         }

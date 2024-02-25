@@ -11,7 +11,7 @@ func navigationReducer(action: Action, state: NavigationState?) -> NavigationSta
         state.path.append(route)
     case NavigationAction.pop:
         if let last = state.path.last, last != state.root {
-            state.path.removeLast()
+            _ = state.path.popLast()
         }
     case NavigationAction.setRoot(let route):
         state.root = route

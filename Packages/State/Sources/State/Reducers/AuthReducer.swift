@@ -12,6 +12,8 @@ func authReducer(action: Action, state: AuthState?) -> AuthState {
         state.user = user
     case AuthAction.logOut:
         state.user = .initial
+    case let AuthAction.setError(error):
+        state.error = error
     default:
         break
     }

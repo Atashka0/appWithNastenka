@@ -4,6 +4,8 @@ import State
 import Combine
 
 struct RegistrationView: View {
+    @ObservedObject var authController: AuthController
+    
     @State var email: String = ""
     @State var username: String = ""
     @State var password: String = ""
@@ -48,9 +50,22 @@ struct RegistrationView: View {
                         passwordMismatch = password != passwordVerification
                     }
                 }
-                Text(passwordMismatch ? "Passwords do not match" : "")
-                    .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
-                    .foregroundColor(.red)
+                if passwordMismatch {
+                    Text("Passwords do not match")
+                        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
+                        .foregroundColor(.red)
+                }
+                else if let error = authController.error {
+                    if case let WithMeError.userInitiatedError(message) = error {
+                        Text(message)
+                            .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
+                            .foregroundColor(.red)
+                    } else {
+                        Text("Oops! something went wrong...")
+                            .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
+                            .foregroundColor(.red)
+                    }
+                }
                 Button {
                     stateStore.dispatch(AuthAction.registerUser(User(username: username.lowercased(), email: email.lowercased()), password))
                 } label: {
@@ -79,12 +94,22 @@ struct RegistrationView: View {
             }
             .padding(.horizontal)
         }
+        .onChange(of: authController.user.data) { userData in
+            if userData != nil {
+                stateStore.dispatch(NavigationAction.setOverlay(nil))
+            }
+        }
+        .onDisappear {
+            if authController.error != nil {
+                stateStore.dispatch(AuthAction.setError(nil))
+            }
+        }
     }
 }
 
 struct RegistrationView_Previews: PreviewProvider {
     static var previews: some View {
-        RegistrationView()
+        RegistrationView(authController: AuthController())
     }
 }
 

@@ -9,4 +9,5 @@ public enum SetEventStateAction: Action {
     case removeLoggedUserEvent(Event)
     case setFeedEvents([Event])
     case setUserEvents(User, [Event])
+    case setError(WithMeError?)
 }

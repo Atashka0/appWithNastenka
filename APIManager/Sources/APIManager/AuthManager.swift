@@ -22,9 +22,14 @@ public class AuthManager {
         request.setValue(APIConstants.HeaderValues.json.rawValue, forHTTPHeaderField: APIConstants.HeaderFields.contentType.rawValue)
         
         do {
-            let (data, _) = try await URLSession.shared.data(for: request)
-            let decoder = JSONDecoder()
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            if let error = handleError(response: response, data: data) {
+                return Result.failure(error)
+            }
+            
             print(String(decoding: data, as: UTF8.self))
+            let decoder = JSONDecoder()
             if let user = try? decoder.decode(User.self, from: data) {
                 return Result.success(user)
             } else {
@@ -51,9 +56,14 @@ public class AuthManager {
         request.setValue(APIConstants.HeaderValues.json.rawValue, forHTTPHeaderField: APIConstants.HeaderFields.contentType.rawValue)
         
         do {
-            let (data, _) = try await URLSession.shared.data(for: request)
-            let decoder = JSONDecoder()
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            if let error = handleError(response: response, data: data) {
+                return Result.failure(error)
+            }
+            
             print(String(decoding: data, as: UTF8.self))
+            let decoder = JSONDecoder()
             let user = try? decoder.decode(User.self, from: data)
             return Result.success(user)
         } catch {

@@ -14,6 +14,9 @@ enum MainViewType: Int, CaseIterable {
 }
 
 struct MainView: View {
+    @ObservedObject var authController: AuthController
+    @ObservedObject var eventController: EventController
+    
     @State var selectedView: MainViewType = .list
     var body: some View {
         VStack {
@@ -88,6 +91,6 @@ extension MainView {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(authController: AuthController(), eventController: EventController())
     }
 }
