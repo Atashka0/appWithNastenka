@@ -3,16 +3,7 @@ import State
 import ReSwift
 
 struct CreateEventView: View {
-    @ObservedObject var eventController: EventController {
-        didSet {
-            if var last = eventController.loggedUserEvents.last {
-                last.id = 0
-                if last == event {
-                    stateStore.dispatch(NavigationAction.setSheet(nil))
-                }
-            }
-        }
-    }
+    @ObservedObject var eventController: EventController
     
     @State private var event: Event = Event(characteristics: [Characteristic()])
     @State private var isTitleEmptyError = false
@@ -141,6 +132,9 @@ struct CreateEventView: View {
                     withAnimation {
                         reader.scrollTo(Self.errorViewId, anchor: .top)
                     }
+                }
+                .onChange(of: eventController.loggedUserEvents) { _ in
+                    stateStore.dispatch(NavigationAction.setSheet(nil))
                 }
             }
             VStack {
