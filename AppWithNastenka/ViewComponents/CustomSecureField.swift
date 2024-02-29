@@ -25,7 +25,7 @@ struct CustomSecureField: View {
                     .resizable()
                     .frame(width: Constants.rightImageWidth, height: Constants.rightImageHeight)
                     .foregroundColor(
-                        !isPasswordVisible ? Color(uiColor: .systemGray5) : ColorScheme.grayAndLemonYellow
+                        !isPasswordVisible ? .gray : ColorScheme.grayAndLemonYellow
                     )
             }
         }
