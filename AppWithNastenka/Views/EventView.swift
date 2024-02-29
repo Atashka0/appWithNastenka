@@ -4,63 +4,57 @@ import State
 struct EventView: View {
     var event: Event
     var body: some View {
-            HStack {
-                VStack (alignment: .center) {
-                    Image(systemName: EventView.Images.circleFill)
-                        .resizable()
-                        .frame(width: EventView.Dimensions.imageSize, height: EventView.Dimensions.imageSize)
-                    Text(event.username)
-                        .lineLimit(1)
-                        .multilineTextAlignment(.center)
-                        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.smallFontSize))
-                }
-                .frame(width:  EventView.Dimensions.userDataFrame, height:  EventView.Dimensions.userDataFrame)
-                Spacer()
-                    .frame(width: EventView.Dimensions.spacerLength)
-                VStack (alignment: .leading) {
-                    Text(event.name)
-                        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.largeFontSize))
-                    Text(event.date)
-                        .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.smallFontSize))
-                    Spacer()
-                    HStack {
-                        ForEach(event.characteristics, id: \.self) { characteristic in
-                            Text(characteristic.name)
-                                .frame(width: CGFloat(characteristic.name.count *  EventView.Dimensions.characteristicWidthMultiplier), height: EventView.Dimensions.characteristicFrameHeight)
-                                .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.smallFontSize))
-                                .lineLimit(1)
-                                .foregroundColor(.black)
-                                .background(ColorScheme.lemonYellow)
-                                .clipShape(RoundedRectangle(cornerRadius:  EventView.Dimensions.characteristicCornerRadius))
-                        }
+        HStack(alignment: .bottom) {
+            VStack (alignment: .center) {
+                Image(systemName: EventView.Images.circleFill)
+                    .resizable()
+                    .overlay(Circle().stroke(.white, lineWidth: EventView.Dimensions.circleStrokeWidth).padding(-EventView.Dimensions.circleStrokeWidth / 2))
+                    .frame(width: EventView.Dimensions.imageSize, height: EventView.Dimensions.imageSize)
+                Text(event.username)
+                    .lineLimit(1)
+                    .multilineTextAlignment(.center)
+                    .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.smallFontSize))
+                    .frame(width: EventView.Dimensions.imageSize + 25)
+            }
+            VStack (alignment: .leading) {
+                Text(event.name)
+                    .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.largeFontSize))
+                Text(event.date)
+                    .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.smallFontSize))
+                HStack {
+                    ForEach(event.characteristics, id: \.self) { characteristic in
+                        Text(characteristic.name)
+                            .frame(width: CGFloat(characteristic.name.count *  EventView.Dimensions.characteristicWidthMultiplier), height: EventView.Dimensions.characteristicFrameHeight)
+                            .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.smallFontSize))
+                            .padding(.horizontal, EventView.Dimensions.characteristicHorisontalPadding)
+                            .lineLimit(1)
+                            .foregroundColor(.black)
+                            .background(ColorScheme.lemonYellow)
+                            .clipShape(RoundedRectangle(cornerRadius:  EventView.Dimensions.characteristicCornerRadius))
                     }
                 }
             }
-            .frame(width: EventView.Dimensions.frameWidth, height: EventView.Dimensions.frameHeight, alignment: .leading)
-            .padding()
-            .background(EventView.Colors.darkGray)
-            .clipShape(RoundedRectangle(cornerRadius: GlobalConstants.defaultCornerRadius))
-        }}
+            Spacer()
+        }
+        .frame(alignment: .leading)
+        .padding()
+        .background(ColorScheme.darkGray)
+        .clipShape(RoundedRectangle(cornerRadius: GlobalConstants.defaultCornerRadius))
+    }
+}
 
 extension EventView {
-    struct Colors {
-        static let darkGray = Color(red:  18/256, green:  18/256, blue:  18/256)
-    }
-    
     struct Dimensions {
-        static let frameWidth: CGFloat  = 355
+        static let circleStrokeWidth: CGFloat = 2
         static let imageSize: CGFloat =  60
-        static let frameHeight: CGFloat =  80
         static let characteristicFrameHeight: CGFloat =  30
-        static let spacerLength: CGFloat = 5
-        static let userDataFrame: CGFloat = 100
+        static let characteristicHorisontalPadding: CGFloat =  10
         static let characteristicCornerRadius: CGFloat = 25
         static let characteristicWidthMultiplier: Int = 6
     }
     
     struct Images {
         static let circleFill = "circle.fill"
-        static let backgroundColor = Color(red:  18/256, green:  18/256, blue:  18/256)
     }
 }
 
@@ -68,6 +62,5 @@ extension EventView {
 struct EventView_Previews: PreviewProvider {
     static var previews: some View {
         EventView(event: Event(username: "margo", name: "margo", date: "April 11, 2024", characteristics: [Characteristic(name: "90's party", description: "blabla")]))
-
     }
 }

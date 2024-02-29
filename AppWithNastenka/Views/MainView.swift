@@ -33,8 +33,6 @@ struct MainView: View {
                             .font(Font.custom(FontNames.jostLight, size: GlobalConstants.smallFontSize))
                         
                     }
-                    .padding(.leading, MainView.Dimensions.tabLeadingPadding)
-                    .padding(.trailing, MainView.Dimensions.tabTrailingPadding)
                     .onTapGesture {
                         withAnimation(.easeInOut) {
                             self.selectedView = item
@@ -44,14 +42,22 @@ struct MainView: View {
                 }
                 Spacer()
                 Image(systemName: MainView.Images.magnifyingGlass)
+                    .imageScale(.large)
+                    .padding(.horizontal)
                 Text("Invites")
             }
-            ScrollView {
-                VStack {
-                    EventView(event: Event(username: "margo_april", name: "Halloween costume party", date: "October  31,  2023", characteristics: [Characteristic(name: "90's party", description: "blabla")]))
-                    Spacer()
-                    EventView(event: Event(username: "valeria_syropyatova", name: "Margo’s BD", date: "April  11,  2024", characteristics: [Characteristic(name: "90's party", description: "blabla")]))
+            switch selectedView {
+            case .list:
+                ScrollView {
+                    VStack {
+                        EventView(event: Event(username: "margo_april", name: "Halloween costume party", date: "October  31,  2023", characteristics: [Characteristic(name: "90's party", description: "blabla")]))
+                        Spacer()
+                        EventView(event: Event(username: "valeria_syropyatova", name: "Margo’s BD", date: "April  11,  2024", characteristics: [Characteristic(name: "90's party", description: "blabla")]))
+                    }
                 }
+            case .map:
+                Spacer()
+                Text("Coming soon...")
             }
             Spacer()
             HStack {
@@ -64,21 +70,21 @@ struct MainView: View {
                 Image(systemName: MainView.Images.circle)
                     .scaleEffect(MainView.Dimensions.imageScale)
             }
+            .padding(.horizontal)
         }
-        .padding()
         .font(Font.custom(FontNames.jostRegular, size: GlobalConstants.fontSize))
+        .padding(MainView.Dimensions.edgePadding)
     }
 }
 
 extension MainView {
     struct Dimensions {
-        static let tabLeadingPadding: CGFloat = -13
-        static let tabTrailingPadding: CGFloat = 10
         static let tabHeight: CGFloat =  35
         static let tabWidth: CGFloat =  50
         static let textHeight: CGFloat =  25
         static let textWidth: CGFloat =  30
-        static let imageScale: CGSize = CGSize(width:  1.5, height:  1.5)
+        static let imageScale: CGSize = CGSize(width:  1.7, height:  1.7)
+        static let edgePadding: CGFloat = 7
     }
     
     struct Images {
